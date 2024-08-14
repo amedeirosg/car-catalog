@@ -1,0 +1,137 @@
+.RegisterContainer{
+    display:flex;
+    flex-direction: column;
+    gap:5rem;
+    padding: 0 10rem;
+    padding-bottom:5rem;
+}
+
+.RegisterTitle{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    gap:5rem;
+}
+
+.RegisterInfo{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    gap:1rem;
+}
+
+.RegisterTitle h1{
+    font-family: 'Playfair Display';
+    font-weight: 500;
+    font-size: 2.5rem;
+    color:#3B383B;
+}
+
+.RegisterTitle hr{
+    width: 100%;
+    height: 1px;
+    background: #858487;
+}
+
+.RegisterTitle p{
+    font-family: 'Work Sans';
+    font-size:1.125rem;
+    color:#858487;
+}
+
+.RegisterRadioBtn{
+    display:flex;
+    gap:2rem;
+    font-family: 'Work Sans';
+    font-size:1.125rem;
+    color:#000;
+}
+
+.RegisterRadioBtn input{
+    transform:scale(1.5);
+}
+
+.RegisterNaturalPerson, .RegisterLegalPerson{
+    display:flex;
+    gap:.5rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.RegisterForm{
+    width: 80%;
+    display:flex;
+    flex-direction: column;
+    gap:5rem;
+}
+
+.RegisterArea{
+    display:flex;
+    flex-direction: column;
+    gap:2rem;
+}
+
+.RegisterLines{
+    display:flex;
+    justify-content: space-evenly;
+    gap:1rem;
+}
+
+.RegisterInput{
+    display:flex;
+    flex-direction: column;
+    width: 45%;
+    gap:.5rem;
+    font-family: 'Work Sans';
+    font-size:1.125rem;
+}
+
+.RegisterInput input {
+    all:unset;
+    height: 2rem;
+    padding:0 .5rem;
+    border:1px solid #545454;
+    border-radius:.25rem;
+}
+
+.RegisterInput input[type="text"]:focus{
+    border-color:rgba(67, 9, 213, 0.781);
+    box-shadow: 0 0 5px rgba(67, 9, 213, 0.781);
+}
+
+#required{
+    color:#ff0000;
+}
+
+#email .RegisterInput{
+    width: 94%;
+}
+
+.RegisterCreateAcc{
+    display:flex;
+    justify-content: space-between;
+    width: 80%;
+    align-items: center;
+    transform: translateX(8rem);
+    gap:3rem;
+}
+
+.RegisterCreateAcc button{
+    all:unset;
+    font-family: 'Work Sans';
+    color:white;
+    font-weight: 500;
+    background: #FC5D0D;
+    padding: 1.25rem 3rem;
+    cursor: pointer;
+}
+
+.RegisterTerms {
+    max-width: 25rem;
+}
+
+.RegisterTerms label{
+    font-weight: 600;
+    text-decoration: underline;
+    cursor: pointer;
+}

@@ -1,0 +1,109 @@
+.MainContainer{
+    padding: 5rem 8rem;
+    display:flex;
+    justify-content: space-between;
+    overflow-x: hidden;
+}
+
+.MainTitle{
+    display:flex;
+    flex-direction: column;
+    gap:1rem;
+}
+
+.MainImage{
+    transform: translateX(8rem);
+}
+
+.MainTitle h1{
+    font-family:'Playfair Display';
+    font-size:3.5rem;
+    font-weight: normal;
+}
+
+.MainTitle p{
+    font-family: 'Work Sans';
+    color:#858487;
+}
+
+.MainPresentation{
+    display:flex;
+    flex-direction: column;
+    gap:2rem;
+}
+
+.MainBtns{
+    display:flex;
+    gap:1.8rem;
+    min-width: 30rem;
+}
+
+.MainBtns button{
+    all:unset;
+    padding: 1.25rem 3rem;
+    color:white;
+    font-family: 'Work Sans';
+    font-weight: 500;
+    cursor: pointer;
+}
+
+#btnCadastro{
+    background: #FC5D0D;
+}
+
+#btnSobre{
+    background: #000;
+}
+
+@media(max-width: 768px){
+    .MainImage{
+        display:none;
+    }
+
+    .MainTitle{
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        
+    }
+    
+    .MainContainer{
+        padding: 5rem 1rem;
+        display:flex;
+        justify-content: space-between;
+        overflow-x: hidden;
+    }
+
+    .MainBtns{
+        align-items: center;
+        justify-content: center;
+    }
+
+    .MainBtns button{
+        padding:1.25rem 2rem;
+        
+    }
+
+}
+
+@media(max-width:490px){
+    .MainPresentation{
+        width: 90%;
+        padding:0 1rem;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .MainTitle h1{
+        font-size:2rem;
+    }
+
+    .MainTitle p{
+        text-align: center;
+    }
+
+    .MainBtns button{
+        padding:1rem;
+        
+    }
+}
