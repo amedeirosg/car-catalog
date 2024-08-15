@@ -27,7 +27,7 @@ export default function Register() {
             <span>Pessoa jurídica</span>
           </label>
         </div>
-        <form className="RegisterForm">
+        <div className="RegisterForm">
           <div className="RegisterArea">
             <div className="RegisterLines">
               <div className="RegisterInput">
@@ -83,6 +83,7 @@ export default function Register() {
 
           <div className="RegisterCreateAcc">
             <button>Cadastrar</button>
+
             <div className="RegisterTerms">
               <p>
                 Ao preencher o formulário acima você concorda com os nossos{" "}
@@ -91,7 +92,7 @@ export default function Register() {
               </p>
             </div>
           </div>
-        </form>
+        </div>
       </div>
     </div>
   );
