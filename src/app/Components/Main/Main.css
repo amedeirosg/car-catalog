@@ -3,6 +3,7 @@
     display:flex;
     justify-content: space-between;
     overflow-x: hidden;
+    align-items: center;
 }
 
 .MainTitle{

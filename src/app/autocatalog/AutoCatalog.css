@@ -1,3 +1,8 @@
+.AutoCatalogArea{
+    display:flex;
+    gap:5rem;
+}
+
 .AutoCatalogContainer{
     padding: 2rem ;
     margin:5rem 0rem 5rem 5rem;
@@ -85,4 +90,47 @@ label{
 #Brand:focus,#Km:focus,#YearFrom:focus,#YearTo:focus,#PriceFrom:focus,#PriceTo:focus{
     border-color:rgba(67, 9, 213, 0.781);
     box-shadow: 0 0 5px rgba(67, 9, 213, 0.781);
+}
+
+.Cards{
+    margin: 5rem 5rem 0rem 5rem;
+    width: 100%;;
+    display:grid;
+    grid-template-columns: repeat(4,auto);
+    align-items: center;
+    gap:1rem;
+}
+
+
+@media (max-width:1624px){
+    .Cards{
+        grid-template-columns: repeat(3,auto);
+    }
+}
+
+@media(max-width:1300px){
+    .Cards{
+        justify-content: center;
+        gap:5rem;
+        margin-top:7rem;
+        margin-bottom:7rem;
+    }
+
+    .AutoCatalogContainer{
+        display:none;
+    }
+
+    .AutoCatalogFilterMobile{
+        position: absolute;
+        margin:2rem 0rem 0rem 8rem;
+        display:flex;
+        font-family: 'Work Sans';
+        font-weight: 500;
+        background:  rgba(164, 164, 164, 0.2);
+        border-radius:99rem;
+        padding:.5rem 1rem;
+        justify-content: center;
+        align-items: center;
+        gap:1rem;
+    }
 }
