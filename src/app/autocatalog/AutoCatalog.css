@@ -101,6 +101,10 @@ label{
     gap:1rem;
 }
 
+.AutoCatalogFilterMobile{
+    display:none;
+}
+
 
 @media (max-width:1624px){
     .Cards{
@@ -132,5 +136,49 @@ label{
         justify-content: center;
         align-items: center;
         gap:1rem;
+    }
+
+    .FilterMobile{
+        position:absolute;
+        width: 100%;
+        height: 100vh;
+        display:flex;
+        justify-content: center;
+        margin-top:5rem;
+        backdrop-filter: blur(1330px); /* Desfoque do fundo */
+    }
+
+    .FilterMobileArea{
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+        background: #fff;
+        height: fit-content;
+        border-radius:1rem;
+        width: 70%;
+        z-index: 2;
+        padding:2rem;
+        font-family: 'Work Sans';
+        display:flex;
+        flex-direction: column;
+        gap:1rem;
+        backdrop-filter: blur(10px); /* Desfoque do fundo */
+    }
+
+    .AutoCatalogArea.overlay{
+    }
+}
+
+
+@media (max-width:1100px){
+    .Cards{
+        grid-template-columns: repeat(2,auto);
+        margin:10rem 0 5rem 0;
+        padding:.5rem;
+    }
+}
+
+
+@media(max-width:622px){
+    .Cards{
+        grid-template-columns: repeat(1,auto);
     }
 }
