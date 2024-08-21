@@ -1,7 +1,39 @@
+"use client";
+import { useEffect, useRef, useState } from "react";
 import RegisterHeader from "../Components/RegisterHeader/registerHeader";
+import { createUser } from "../../database/fs";
+import InputMask from "react-input-mask";
 import "./Register.css";
 
 export default function Register() {
+  const [name, setName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [cpf, setCpf] = useState(0);
+  const [mail, setMail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [password, setPassword] = useState("");
+  const [confPass, setConfPass] = useState("");
+  const regexMail = /^[\w\.-]+@[a-zA-Z\d\.-]+\.[a-zA-Z]{2,}$/;
+
+  const validateEmail = () => {
+    try {
+      if (regexMail.test(mail)) {
+        if (password == confPass) {
+          createUser(name, lastName, cpf, mail, phone, password);
+        } else {
+          console.error("Senhas não coincidem.");
+        }
+      } else {
+        console.error("E-mail inválido.");
+      }
+    } catch (error) {
+      console.error(
+        "Erro na função ValidateEmail no componente Cadastro",
+        error
+      );
+    }
+  };
+
   return (
     <div className="RegisterContainer">
       <RegisterHeader />
@@ -34,13 +66,21 @@ export default function Register() {
                 <span>
                   Nome <label id="required">*</label>
                 </span>
-                <input type="text" />
+                <input
+                  type="text"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
               </div>
               <div className="RegisterInput">
                 <span>
                   Sobrenome <label id="required">*</label>
                 </span>
-                <input type="text" />
+                <input
+                  type="text"
+                  value={lastName}
+                  onChange={(e) => setLastName(e.target.value)}
+                />
               </div>
             </div>
             <div className="RegisterLines">
@@ -48,13 +88,23 @@ export default function Register() {
                 <span>
                   CPF <label id="required">*</label>
                 </span>
-                <input type="text" />
+                <InputMask
+                  mask="999.999.999-99"
+                  alwaysShowMask={true}
+                  value={cpf}
+                  onChange={(e: any) => setCpf(e.target.value)}
+                />
               </div>
               <div className="RegisterInput">
                 <span>
                   Telefone <label id="required">*</label>
                 </span>
-                <input type="text" />
+                <InputMask
+                  mask="(99) 99999-9999"
+                  alwaysShowMask={true}
+                  value={phone}
+                  onChange={(e: any) => setPhone(e.target.value)}
+                />
               </div>
             </div>
             <div className="RegisterLines" id="email">
@@ -62,7 +112,11 @@ export default function Register() {
                 <span>
                   Email <label id="required">*</label>
                 </span>
-                <input type="text" />
+                <input
+                  type="text"
+                  value={mail}
+                  onChange={(e: any) => setMail(e.target.value)}
+                />
               </div>
             </div>
             <div className="RegisterLines">
@@ -70,20 +124,27 @@ export default function Register() {
                 <span>
                   Senha <label id="required">*</label>
                 </span>
-                <input type="text" />
+                <input
+                  type="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
               </div>
               <div className="RegisterInput">
                 <span>
                   Confirmar senha <label id="required">*</label>
                 </span>
-                <input type="text" />
+                <input
+                  type="password"
+                  value={confPass}
+                  onChange={(e) => setConfPass(e.target.value)}
+                />
               </div>
             </div>
           </div>
 
           <div className="RegisterCreateAcc">
-            <button>Cadastrar</button>
-
+            <button onClick={validateEmail}>Cadastrar</button>
             <div className="RegisterTerms">
               <p>
                 Ao preencher o formulário acima você concorda com os nossos{" "}

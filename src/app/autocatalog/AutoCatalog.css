@@ -105,6 +105,16 @@ label{
     display:none;
 }
 
+.FilterTitleClose{
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.FilterMobile{
+    display:none;
+}
+
 
 @media (max-width:1624px){
     .Cards{

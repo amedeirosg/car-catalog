@@ -2,6 +2,7 @@
 import { Filter } from "lucide-react";
 import Card from "../Components/Card/card";
 import Header from "../Components/Header/header";
+import { X } from "lucide-react";
 import "./AutoCatalog.css";
 import { useState } from "react";
 
@@ -112,7 +113,11 @@ export default function AutoCatalog() {
         {openFilter ? (
           <div className="FilterMobile">
             <div className="FilterMobileArea">
-              <h1>Filtros</h1>
+              <div className="FilterTitleClose">
+                <h1>Filtros</h1>
+                <X onClick={() => setOpenFilter(false)} />
+              </div>
+
               <div className="AutoCatalogBrand">
                 <span>Marca, modelo e versão</span>
                 <input id="Brand" type="text" placeholder="Fiat" />
