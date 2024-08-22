@@ -8,29 +8,52 @@ import "./Register.css";
 export default function Register() {
   const [name, setName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [cpf, setCpf] = useState(0);
+  const [cpf, setCpf] = useState("");
   const [mail, setMail] = useState("");
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
   const [confPass, setConfPass] = useState("");
+  const [errors, setErrors] = useState({});
   const regexMail = /^[\w\.-]+@[a-zA-Z\d\.-]+\.[a-zA-Z]{2,}$/;
 
   const validateEmail = () => {
-    try {
-      if (regexMail.test(mail)) {
-        if (password == confPass) {
-          createUser(name, lastName, cpf, mail, phone, password);
-        } else {
-          console.error("Senhas não coincidem.");
-        }
-      } else {
-        console.error("E-mail inválido.");
+    if (!regexMail.test(mail)) {
+      return "E-mail inválido";
+    }
+  };
+
+  const validatePassword = () => {
+    if (password !== confPass) {
+      return "Senhas não coincidem";
+    }
+  };
+
+  const validateRequiredFields = () => {
+    const requiredFields = { name, lastName, cpf, mail, phone, password };
+    for (let [key, value] of Object.entries(requiredFields)) {
+      console.log(key, value);
+      if (value.trim() === "") {
+        return `O campo ${key} é obrigatório.`;
       }
-    } catch (error) {
-      console.error(
-        "Erro na função ValidateEmail no componente Cadastro",
-        error
-      );
+    }
+  };
+
+  const validateAll = () => {
+    const newErrors = {};
+    const emailError = validateEmail();
+    if (emailError) newErrors.email = emailError;
+
+    const passwordError = validatePassword();
+    if (passwordError) newErrors.password = passwordError;
+
+    const requiredFieldsError = validateRequiredFields();
+    if (requiredFieldsError) newErrors.requiredFields = requiredFieldsError;
+
+    setErrors(newErrors);
+
+    // Se não houver erros, enviar o formulário
+    if (Object.keys(newErrors).length === 0) {
+      createUser(name, lastName, cpf, mail, phone, password);
     }
   };
 
@@ -66,6 +89,7 @@ export default function Register() {
                 <span>
                   Nome <label id="required">*</label>
                 </span>
+
                 <input
                   type="text"
                   value={name}
@@ -115,7 +139,9 @@ export default function Register() {
                 <input
                   type="text"
                   value={mail}
-                  onChange={(e: any) => setMail(e.target.value)}
+                  onChange={(e: any) => {
+                    setMail(e.target.value);
+                  }}
                 />
               </div>
             </div>
@@ -127,7 +153,9 @@ export default function Register() {
                 <input
                   type="password"
                   value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                  }}
                 />
               </div>
               <div className="RegisterInput">
@@ -139,12 +167,19 @@ export default function Register() {
                   value={confPass}
                   onChange={(e) => setConfPass(e.target.value)}
                 />
+                {/* Exibição dos erros */}
+
+                {Object.values(errors).map((error, index) => (
+                  <p key={index} style={{ color: "red" }}>
+                    {error as string}
+                  </p>
+                ))}
               </div>
             </div>
           </div>
 
           <div className="RegisterCreateAcc">
-            <button onClick={validateEmail}>Cadastrar</button>
+            <button onClick={validateAll}>Cadastrar</button>
             <div className="RegisterTerms">
               <p>
                 Ao preencher o formulário acima você concorda com os nossos{" "}
