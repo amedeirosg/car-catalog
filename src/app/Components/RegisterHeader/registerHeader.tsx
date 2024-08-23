@@ -1,6 +1,7 @@
 import "./RegisterHeader.css";
 import Image from "next/image";
 import Logo from "../../../../public/assets/logo.png";
+
 export default function RegisterHeader() {
   return (
     <div className="RegisterHeaderContainer">

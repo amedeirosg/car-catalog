@@ -13,6 +13,22 @@
     gap:5rem;
 }
 
+.RegisterBack{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    position:relative;
+}
+
+.RegisterIconBack {
+    position: absolute;
+    display:flex;
+    align-items: center;
+    left:0;
+    font-size:18px;
+}
+
 .RegisterInfo{
     display:flex;
     flex-direction: column;
@@ -178,5 +194,11 @@
 
     .RegisterInput, #email input{
         width: 100%;
+    }
+}
+
+@media(max-width:500px){
+    .RegisterIconBack{
+        top:-1.5rem;
     }
 }

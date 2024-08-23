@@ -3,7 +3,9 @@ import { useEffect, useRef, useState } from "react";
 import RegisterHeader from "../Components/RegisterHeader/registerHeader";
 import { createUser } from "../../database/fs";
 import InputMask from "react-input-mask";
+import { ChevronLeft } from "lucide-react";
 import "./Register.css";
+import Link from "next/link";
 
 export default function Register() {
   const [name, setName] = useState("");
@@ -31,7 +33,6 @@ export default function Register() {
   const validateRequiredFields = () => {
     const requiredFields = { name, lastName, cpf, mail, phone, password };
     for (let [key, value] of Object.entries(requiredFields)) {
-      console.log(key, value);
       if (value.trim() === "") {
         return `O campo ${key} é obrigatório.`;
       }
@@ -51,7 +52,7 @@ export default function Register() {
 
     setErrors(newErrors);
 
-    // Se não houver erros, enviar o formulário
+    // if there are no errors, create the account
     if (Object.keys(newErrors).length === 0) {
       createUser(name, lastName, cpf, mail, phone, password);
     }
@@ -62,7 +63,20 @@ export default function Register() {
       <RegisterHeader />
       <div className="RegisterTitle">
         <div className="RegisterInfo">
-          <h1>Crie seu cadastro</h1>
+          <div className="RegisterBack">
+            <div className="RegisterIconBack">
+              <Link
+                href="/"
+                style={{ all: "unset", display: "flex", alignItems: "center" }}
+              >
+                <ChevronLeft />
+                <span>Voltar</span>
+              </Link>
+            </div>
+
+            <h1>Crie seu cadastro</h1>
+          </div>
+
           <hr></hr>
           <p>
             Para criar o seu site e personalizá-lo é necessário preencher
@@ -171,7 +185,7 @@ export default function Register() {
 
                 {Object.values(errors).map((error, index) => (
                   <p key={index} style={{ color: "red" }}>
-                    {error as string}
+                    * {error as string}
                   </p>
                 ))}
               </div>

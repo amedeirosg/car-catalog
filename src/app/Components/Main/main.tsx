@@ -1,9 +1,16 @@
+"use client";
 import "./Main.css";
 import Image from "next/image";
 import ImageMain from "../../../../public/assets/carMainPage.png";
 import Header from "../Header/header";
-
+import { useRouter } from "next/navigation";
+import Link from "next/link";
 export default function Main() {
+  const router = useRouter();
+  const goToRegister = () => {
+    router.push("/cadastro");
+  };
+
   return (
     <div className="Header">
       <Header />
@@ -14,8 +21,12 @@ export default function Main() {
             <p>Facilitando a criação de catálogos para sua loja de carros</p>
           </div>
           <div className="MainBtns">
-            <button id="btnCadastro">Cadastrar agora</button>
-            <button id="btnSobre">Sobre nós</button>
+            <button id="btnCadastro" onClick={goToRegister}>
+              Cadastrar agora
+            </button>
+            <Link href="#about" style={{ all: "unset" }}>
+              <button id="btnSobre">Sobre nós</button>
+            </Link>
           </div>
         </div>
         <div className="MainImage">
