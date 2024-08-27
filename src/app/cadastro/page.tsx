@@ -6,11 +6,12 @@ import InputMask from "react-input-mask";
 import { ChevronLeft } from "lucide-react";
 import "./Register.css";
 import Link from "next/link";
+import { validateRequiredFields } from "../../app/functions";
 
 export default function Register() {
   const [name, setName] = useState("");
   const [lastName, setLastName] = useState("");
-  const [cpf, setCpf] = useState("");
+  const [cpfCnpj, setCpfCnpj] = useState("");
   const [mail, setMail] = useState("");
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
@@ -24,39 +25,59 @@ export default function Register() {
     }
   };
 
-  const validatePassword = () => {
+  const validatePassword = (password: any) => {
+    const minLength = 8;
+    const regex =
+      /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+
+    if (password.length < minLength) {
+      return "A senha deve ter pelo menos 8 caracteres";
+    }
+
+    if (!regex.test(password)) {
+      return "A senha deve incluir letras maiúsculas, minúsculas, números e caracteres especiais";
+    }
     if (password !== confPass) {
       return "Senhas não coincidem";
     }
   };
 
-  const validateRequiredFields = () => {
-    const requiredFields = { name, lastName, cpf, mail, phone, password };
-    for (let [key, value] of Object.entries(requiredFields)) {
-      if (value.trim() === "") {
-        return `O campo ${key} é obrigatório.`;
-      }
-    }
-  };
+  // const validateRequiredFields = () => {
+  //   const requiredFields = { name, lastName, cpfCnpj, mail, phone, password };
+  //   for (let [key, value] of Object.entries(requiredFields)) {
+  //     if (value.trim() === "") {
+  //       return `O campo ${key} é obrigatório.`;
+  //     }
+  //   }
+  // };
 
   const validateAll = () => {
     const newErrors = {};
     const emailError = validateEmail();
     if (emailError) newErrors.email = emailError;
 
-    const passwordError = validatePassword();
+    const passwordError = validatePassword(password);
     if (passwordError) newErrors.password = passwordError;
 
-    const requiredFieldsError = validateRequiredFields();
+    const requiredFieldsError = validateRequiredFields({
+      name,
+      lastName,
+      cpfCnpj,
+      mail,
+      phone,
+      password,
+    });
     if (requiredFieldsError) newErrors.requiredFields = requiredFieldsError;
 
     setErrors(newErrors);
 
     // if there are no errors, create the account
     if (Object.keys(newErrors).length === 0) {
-      createUser(name, lastName, cpf, mail, phone, password);
+      createUser({ name, lastName, cpfCnpj, mail, phone, password });
     }
   };
+
+  const [selectedOption, setSelectedOption] = useState("natural");
 
   return (
     <div className="RegisterContainer">
@@ -67,7 +88,12 @@ export default function Register() {
             <div className="RegisterIconBack">
               <Link
                 href="/"
-                style={{ all: "unset", display: "flex", alignItems: "center" }}
+                style={{
+                  all: "unset",
+                  display: "flex",
+                  alignItems: "center",
+                  cursor: "pointer",
+                }}
               >
                 <ChevronLeft />
                 <span>Voltar</span>
@@ -88,11 +114,23 @@ export default function Register() {
 
         <div className="RegisterRadioBtn">
           <label className="RegisterNaturalPerson">
-            <input type="radio" name="options" />
+            <input
+              type="radio"
+              name="options"
+              value="natural"
+              checked={selectedOption === "natural"}
+              onChange={() => setSelectedOption("natural")}
+            />
             <span>Pessoa física</span>
           </label>
           <label className="RegisterLegalPerson">
-            <input type="radio" name="options" />
+            <input
+              type="radio"
+              name="options"
+              value="legal"
+              checked={selectedOption === "legal"}
+              onChange={() => setSelectedOption("legal")}
+            />
             <span>Pessoa jurídica</span>
           </label>
         </div>
@@ -122,17 +160,34 @@ export default function Register() {
               </div>
             </div>
             <div className="RegisterLines">
-              <div className="RegisterInput">
-                <span>
-                  CPF <label id="required">*</label>
-                </span>
-                <InputMask
-                  mask="999.999.999-99"
-                  alwaysShowMask={true}
-                  value={cpf}
-                  onChange={(e: any) => setCpf(e.target.value)}
-                />
-              </div>
+              {selectedOption === "natural" ? (
+                <div className="RegisterInput">
+                  <span>
+                    CPF <label id="required">*</label>
+                  </span>
+                  <InputMask
+                    mask="999.999.999-99"
+                    alwaysShowMask={true}
+                    value={cpfCnpj}
+                    onChange={(e: any) => setCpfCnpj(e.target.value)}
+                  />
+                </div>
+              ) : (
+                <div className="RegisterInput">
+                  <div className="RegisterInput">
+                    <span>
+                      CNPJ <label id="required">*</label>
+                    </span>
+                    <InputMask
+                      mask="99.999.999/9999-99"
+                      alwaysShowMask={true}
+                      value={cpfCnpj}
+                      onChange={(e: any) => setCpfCnpj(e.target.value)}
+                    />
+                  </div>
+                </div>
+              )}
+
               <div className="RegisterInput">
                 <span>
                   Telefone <label id="required">*</label>
