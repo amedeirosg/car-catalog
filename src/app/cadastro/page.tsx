@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import RegisterHeader from "../Components/RegisterHeader/registerHeader";
 import { createUser } from "../../database/fs";
 import InputMask from "react-input-mask";
@@ -7,8 +7,10 @@ import { ChevronLeft } from "lucide-react";
 import "./Register.css";
 import Link from "next/link";
 import { validateRequiredFields } from "../../app/functions";
+import { InfoContext } from "../Components/ContextProvider/contextProvider";
 
 export default function Register() {
+  const { infoAcc, setInfoAcc } = useContext(InfoContext);
   const [name, setName] = useState("");
   const [lastName, setLastName] = useState("");
   const [cpfCnpj, setCpfCnpj] = useState("");
@@ -18,6 +20,7 @@ export default function Register() {
   const [confPass, setConfPass] = useState("");
   const [errors, setErrors] = useState({});
   const regexMail = /^[\w\.-]+@[a-zA-Z\d\.-]+\.[a-zA-Z]{2,}$/;
+  const [selectedOption, setSelectedOption] = useState("natural");
 
   const validateEmail = () => {
     if (!regexMail.test(mail)) {
@@ -73,11 +76,14 @@ export default function Register() {
 
     // if there are no errors, create the account
     if (Object.keys(newErrors).length === 0) {
-      createUser({ name, lastName, cpfCnpj, mail, phone, password });
+      setInfoAcc({ name, lastName, cpfCnpj, mail, phone, password });
+      setTimeout(() => {
+        window.location.assign("/cadastro-loja");
+      }, 1500);
+
+      // createUser({ name, lastName, cpfCnpj, mail, phone, password });
     }
   };
-
-  const [selectedOption, setSelectedOption] = useState("natural");
 
   return (
     <div className="RegisterContainer">

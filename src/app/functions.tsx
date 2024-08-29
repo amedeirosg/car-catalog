@@ -5,7 +5,3 @@ export const validateRequiredFields = (fields: Record<string, any>) => {
     }
   }
 };
-
-export const teste = (teste: Object) => {
-  console.log(teste);
-};

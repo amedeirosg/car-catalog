@@ -1,11 +1,13 @@
 "use client";
 import RegisterHeader from "../Components/RegisterHeader/registerHeader";
 import InputMask from "react-input-mask";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { validateRequiredFields, teste } from "../functions";
+import { InfoContext } from "../Components/ContextProvider/contextProvider";
 import "./StoreRegister.css";
 
 export default function StoreRegister() {
+  const { infoAcc, setInfoAcc } = useContext(InfoContext);
   const [cep, setCep] = useState("");
   const [state, setState] = useState("");
   const [city, setCity] = useState("");
@@ -42,8 +44,20 @@ export default function StoreRegister() {
     setErrors(newErrors);
 
     if (Object.keys(newErrors).length === 0) {
-      return "OK";
+      console.log(infoAcc);
+      setInfoAcc({
+        ...infoAcc,
+        cep,
+        state,
+        city,
+        neighborhood,
+        address,
+        number,
+        complement,
+      });
     }
+
+    console.log(infoAcc);
   };
 
   return (
