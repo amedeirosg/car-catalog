@@ -51,7 +51,7 @@
     box-shadow: 0 0 5px rgba(67, 9, 213, 0.781);
 }
 
-.StoreRegisterCEP,.StoreRegisterNeighborhood,.StoreRegisterAddress{
+.StoreRegisterCEP,.StoreRegisterNeighborhood,.StoreRegisterAddress,.StoreName,.StoreInfo{
     display:flex;
     flex-direction: column;
     gap:.5rem;

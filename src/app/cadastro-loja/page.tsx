@@ -5,6 +5,7 @@ import { useContext, useState } from "react";
 import { validateRequiredFields, teste } from "../functions";
 import { InfoContext } from "../Components/ContextProvider/contextProvider";
 import "./StoreRegister.css";
+import { createUser } from "@/database/fs";
 
 export default function StoreRegister() {
   const { infoAcc, setInfoAcc } = useContext(InfoContext);
@@ -15,6 +16,7 @@ export default function StoreRegister() {
   const [address, setAddress] = useState("");
   const [number, setNumber] = useState("");
   const [complement, setComplement] = useState("");
+  const [nameOfStore, setNameOfStore] = useState("");
   const [errors, setErrors] = useState({});
 
   const validateCEP = () => {
@@ -38,6 +40,7 @@ export default function StoreRegister() {
       address,
       number,
       complement,
+      nameOfStore,
     });
     if (requiredFieldsError) newErrors.requiredFields = requiredFieldsError;
 
@@ -54,10 +57,10 @@ export default function StoreRegister() {
         address,
         number,
         complement,
+        nameOfStore,
       });
+      createUser({ infoAcc });
     }
-
-    console.log(infoAcc);
   };
 
   return (
@@ -70,6 +73,18 @@ export default function StoreRegister() {
         <p>Preencha as informações de endereço da sua loja</p>
       </div>
       <div className="StoreRegisterArea">
+        <div className="StoreName">
+          <p>
+            Nome da loja (como aparecerá no website){" "}
+            <label id="required">*</label>
+          </p>
+          <input
+            type="text"
+            value={nameOfStore}
+            onChange={(e: any) => setNameOfStore(e.target.value)}
+          />
+        </div>
+
         <div className="StoreRegisterCEP">
           <p>
             CEP <label id="required">*</label>
