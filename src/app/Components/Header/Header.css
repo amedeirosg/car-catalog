@@ -13,6 +13,13 @@
     font-size:1.5rem;
 }
 
+#login{
+    background: #FC5D0D;
+    color:#fff;
+    padding:.5rem 1rem;
+    font-weight: 500;
+}
+
 .HeaderLogo{
     display:flex;
     align-items: center;

@@ -17,6 +17,14 @@ export default function Header() {
         <button>Início</button>
         <button>Sobre</button>
         <button>Contato</button>
+        <button
+          id="login"
+          onClick={() => {
+            window.location.assign("/login");
+          }}
+        >
+          Entrar
+        </button>
       </div>
       {openMenu ? (
         ""

@@ -1,7 +1,12 @@
 import { initializeApp } from "firebase/app";
-import { addDoc, getFirestore } from "firebase/firestore";
-import { collection, getDocs } from "firebase/firestore";
-import { useState } from "react";
+import {
+  addDoc,
+  getFirestore,
+  collection,
+  getDocs,
+  query,
+  where,
+} from "firebase/firestore";
 
 const firebaseApp = initializeApp({
   apiKey: "AIzaSyCluqF8sRPoq-63GbJNnPrjsr8Phfg7BxA",
@@ -31,10 +36,27 @@ const userCollectionRef = collection(db, "users");
 //   //   console.log({ p1, p2 });
 // }
 
+/**
+ * Função para verificar se um e-mail já existe na coleção "users".
+ * @param {string} email - O e-mail a ser verificado.
+ * @returns {Promise<boolean>} - Retorna uma Promise que resolve para true se o e-mail existir, ou false se não existir.
+ */
+
+export async function checkIfMailExists(mailValue) {
+  try {
+    const q = query(userCollectionRef, where("mail", "==", mailValue));
+    const querySnapshot = await getDocs(q);
+
+    return !querySnapshot.empty; // Retorna true se encontrar pelo menos um documento
+  } catch (error) {
+    console.error("Erro ao verificar o valor da chave 'mail':", error);
+    throw error;
+  }
+}
+
 export async function createUser(fields: Record<string, any>) {
   try {
     const docRef = await addDoc(userCollectionRef, fields);
-
     console.log("Usuário criado! ID do documento: ", docRef.id);
   } catch (error) {
     console.error("Erro ao criar usuário: ", error);

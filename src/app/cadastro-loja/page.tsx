@@ -59,7 +59,9 @@ export default function StoreRegister() {
         complement,
         nameOfStore,
       });
-      createUser({ infoAcc });
+      setTimeout(() => {
+        createUser(infoAcc);
+      }, 1500);
     }
   };
 
