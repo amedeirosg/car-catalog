@@ -42,12 +42,24 @@ const userCollectionRef = collection(db, "users");
  * @returns {Promise<boolean>} - Retorna uma Promise que resolve para true se o e-mail existir, ou false se não existir.
  */
 
-export async function checkIfMailExists(mailValue) {
+export async function checkIfAccExists(mailValue, passwordValue) {
   try {
-    const q = query(userCollectionRef, where("mail", "==", mailValue));
+    const q = query(
+      userCollectionRef,
+      where("mail", "==", mailValue),
+      where("password", "==", passwordValue)
+    );
     const querySnapshot = await getDocs(q);
 
-    return !querySnapshot.empty; // Retorna true se encontrar pelo menos um documento
+    if (!querySnapshot.empty) {
+      // Usuário encontrado
+      // console.log("Usuário encontrado:", querySnapshot.docs[0].data());
+      return true;
+    } else {
+      // Usuário não encontrado
+      // console.log("Usuário não encontrado.");
+      return false;
+    }
   } catch (error) {
     console.error("Erro ao verificar o valor da chave 'mail':", error);
     throw error;

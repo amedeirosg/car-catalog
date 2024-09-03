@@ -1,17 +1,20 @@
 "use client";
 import { useState } from "react";
-import { checkIfMailExists } from "@/database/fs";
+import { checkIfAccExists } from "@/database/fs";
+import { ChevronLeft } from "lucide-react";
+import { useHandleBack } from "../Components/HandleBack/handleBack";
 import RegisterHeader from "../Components/RegisterHeader/registerHeader";
 import "./Login.css";
 
 export default function Login() {
   const [getEmail, setGetEmail] = useState("");
   const [getPass, setGetPass] = useState("");
-
+  const handleBack = useHandleBack();
   const handleCheckAcc = async () => {
     try {
-      const exists = await checkIfMailExists(getEmail);
-      console.log(exists);
+      const existsAcc = await checkIfAccExists(getEmail, getPass);
+
+      console.log(existsAcc);
     } catch (error) {
       console.error("Erro ao verificar o e-mail:", error);
     }
@@ -20,9 +23,16 @@ export default function Login() {
   return (
     <div className="LoginContainer">
       <RegisterHeader />
-      <div className="LoginTitle">
-        <span>Entre na sua conta</span>
+      <div className="LoginAreaTitle">
+        <div className="LoginTitle">
+          <div className="LoginBack" onClick={handleBack}>
+            <ChevronLeft />
+            <span>Voltar</span>
+          </div>
+          <span>Entre na sua conta</span>
+        </div>
       </div>
+      <hr></hr>
 
       <div className="LoginFormArea">
         <div className="LoginForm">
@@ -42,7 +52,14 @@ export default function Login() {
           </button>
         </div>
         <span>Não possui uma conta?</span>
-        <span id="register">Cadastre-se</span>
+        <span
+          id="register"
+          onClick={() => {
+            window.location.assign("/cadastro");
+          }}
+        >
+          Cadastre-se
+        </span>
       </div>
     </div>
   );

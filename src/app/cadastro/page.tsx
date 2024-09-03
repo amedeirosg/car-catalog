@@ -1,13 +1,13 @@
 "use client";
-import { useContext, useEffect, useRef, useState } from "react";
-import RegisterHeader from "../Components/RegisterHeader/registerHeader";
-import { createUser } from "../../database/fs";
-import InputMask from "react-input-mask";
-import { ChevronLeft } from "lucide-react";
 import "./Register.css";
-import Link from "next/link";
+import { useContext, useEffect, useRef, useState } from "react";
+import { ChevronLeft } from "lucide-react";
+import { useHandleBack } from "../Components/HandleBack/handleBack";
 import { validateRequiredFields } from "../../app/functions";
 import { InfoContext } from "../Components/ContextProvider/contextProvider";
+import RegisterHeader from "../Components/RegisterHeader/registerHeader";
+import Link from "next/link";
+import InputMask from "react-input-mask";
 
 export default function Register() {
   const { infoAcc, setInfoAcc } = useContext(InfoContext);
@@ -21,6 +21,8 @@ export default function Register() {
   const [errors, setErrors] = useState({});
   const regexMail = /^[\w\.-]+@[a-zA-Z\d\.-]+\.[a-zA-Z]{2,}$/;
   const [selectedOption, setSelectedOption] = useState("natural");
+
+  const handleBack = useHandleBack()
 
   const validateEmail = () => {
     if (!regexMail.test(mail)) {
@@ -77,10 +79,10 @@ export default function Register() {
     // if there are no errors, create the account
     if (Object.keys(newErrors).length === 0) {
       setInfoAcc({ name, lastName, cpfCnpj, mail, phone, password });
-      setTimeout(() => {
-        window.location.assign("/cadastro-loja");
-      }, 1500);
-
+      window.location.assign("/cadastro-loja");
+      // setTimeout(() => {
+      //   window.location.assign("/cadastro-loja");
+      // }, 1500);
       // createUser({ name, lastName, cpfCnpj, mail, phone, password });
     }
   };
@@ -91,8 +93,8 @@ export default function Register() {
       <div className="RegisterTitle">
         <div className="RegisterInfo">
           <div className="RegisterBack">
-            <div className="RegisterIconBack">
-              <Link
+            <div className="RegisterIconBack" onClick={handleBack}>
+              {/* <Link
                 href="/"
                 style={{
                   all: "unset",
@@ -103,7 +105,9 @@ export default function Register() {
               >
                 <ChevronLeft />
                 <span>Voltar</span>
-              </Link>
+              </Link> */}
+              <ChevronLeft />
+              <span>Voltar</span>
             </div>
 
             <h1>Crie seu cadastro</h1>

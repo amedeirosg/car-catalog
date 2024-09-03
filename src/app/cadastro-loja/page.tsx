@@ -48,7 +48,8 @@ export default function StoreRegister() {
 
     if (Object.keys(newErrors).length === 0) {
       console.log(infoAcc);
-      setInfoAcc({
+
+      const updateInfo = {
         ...infoAcc,
         cep,
         state,
@@ -58,10 +59,10 @@ export default function StoreRegister() {
         number,
         complement,
         nameOfStore,
-      });
-      setTimeout(() => {
-        createUser(infoAcc);
-      }, 1500);
+      };
+
+      setInfoAcc(updateInfo);
+      createUser(updateInfo);
     }
   };
 

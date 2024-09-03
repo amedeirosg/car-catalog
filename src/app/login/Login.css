@@ -3,7 +3,7 @@
     font-family: 'Work Sans';
     display:flex;
     flex-direction: column;
-    gap:5rem;
+    gap:1rem;
 }
 
 
@@ -14,10 +14,24 @@
     flex-direction: column;
     gap:3rem;
     font-size:1.125rem;
+    margin-top:5rem;
 }
 
+.LoginAreaTitle{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    margin-top:5rem;
+}
+
+
 .LoginTitle{
+    position:relative;
     text-align: center;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    width: 60%;
 }
 
 #register{
@@ -72,4 +86,32 @@
 .LoginForm input[type="text"]:focus, .LoginPassword input[type="password"]:focus{
     border-color:rgba(67, 9, 213, 0.781);
     box-shadow: 0 0 5px rgba(67, 9, 213, 0.781);
+}
+
+
+.LoginBack{
+    display:flex;
+    align-items: center;
+    position:absolute;
+    left:0;
+}
+
+.LoginBack span{
+    font-size:18px;
+}
+
+
+@media(max-width: 920px){
+
+    
+
+    .LoginForm{
+        width: 80%;
+    }
+}
+
+@media(max-width:400px){
+    .LoginContainer{
+        padding:0 1rem;
+    }
 }
