@@ -4,8 +4,10 @@ import Logo from "../../../../public/assets/logo.png";
 import Image from "next/image";
 import { useState } from "react";
 import { X } from "lucide-react";
+import { useHandleNext } from "../HandleNext/handleNext";
 export default function Header() {
   const [openMenu, setOpenMenu] = useState(false);
+  const handleNext = useHandleNext({ route: "/login" });
 
   return (
     <div className="HeaderContainer">
@@ -20,7 +22,7 @@ export default function Header() {
         <button
           id="login"
           onClick={() => {
-            window.location.assign("/login");
+            handleNext();
           }}
         >
           Entrar

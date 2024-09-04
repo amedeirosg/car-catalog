@@ -3,6 +3,7 @@ import { useState } from "react";
 import { checkIfAccExists } from "@/database/fs";
 import { ChevronLeft } from "lucide-react";
 import { useHandleBack } from "../Components/HandleBack/handleBack";
+import { useHandleNext } from "../Components/HandleNext/handleNext";
 import RegisterHeader from "../Components/RegisterHeader/registerHeader";
 import "./Login.css";
 
@@ -10,10 +11,13 @@ export default function Login() {
   const [getEmail, setGetEmail] = useState("");
   const [getPass, setGetPass] = useState("");
   const handleBack = useHandleBack();
+  const handleNext = useHandleNext({ route: "/cadastro-catalogo" });
   const handleCheckAcc = async () => {
     try {
       const existsAcc = await checkIfAccExists(getEmail, getPass);
-
+      if (existsAcc) {
+        handleNext();
+      }
       console.log(existsAcc);
     } catch (error) {
       console.error("Erro ao verificar o e-mail:", error);

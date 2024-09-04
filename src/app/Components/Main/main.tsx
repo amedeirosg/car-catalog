@@ -3,13 +3,10 @@ import "./Main.css";
 import Image from "next/image";
 import ImageMain from "../../../../public/assets/carMainPage.png";
 import Header from "../Header/header";
-import { useRouter } from "next/navigation";
-import Link from "next/link";
+import { useHandleNext } from "../HandleNext/handleNext";
+import { useState } from "react";
 export default function Main() {
-  const router = useRouter();
-  const goToRegister = () => {
-    router.push("/cadastro");
-  };
+  const handleNext = (page: string) => useHandleNext({ route: page });
 
   return (
     <div className="Header">
@@ -21,12 +18,12 @@ export default function Main() {
             <p>Facilitando a criação de catálogos para sua loja de carros</p>
           </div>
           <div className="MainBtns">
-            <button id="btnCadastro" onClick={goToRegister}>
+            <button id="btnCadastro" onClick={handleNext("/cadastro")}>
               Cadastrar agora
             </button>
-            <Link href="#about" style={{ all: "unset" }}>
-              <button id="btnSobre">Sobre nós</button>
-            </Link>
+            <button id="btnSobre" onClick={handleNext("/login")}>
+              Acessar
+            </button>
           </div>
         </div>
         <div className="MainImage">

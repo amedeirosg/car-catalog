@@ -6,7 +6,12 @@ import {
   getDocs,
   query,
   where,
+  doc,
+  getDoc,
 } from "firebase/firestore";
+
+import { getAuth } from "firebase/auth";
+import { useState } from "react";
 
 const firebaseApp = initializeApp({
   apiKey: "AIzaSyCluqF8sRPoq-63GbJNnPrjsr8Phfg7BxA",
@@ -42,6 +47,23 @@ const userCollectionRef = collection(db, "users");
  * @returns {Promise<boolean>} - Retorna uma Promise que resolve para true se o e-mail existir, ou false se não existir.
  */
 
+export async function getNameOfStore(mail: string) {
+  try {
+    const q = query(userCollectionRef, where("mail", "==", mail));
+
+    const querySnapshot = await getDocs(q);
+
+    if (!querySnapshot.empty) {
+      const userDoc = querySnapshot.docs[0];
+      return userDoc.data().nameOfStore;
+    } else {
+      console.log("Nenhum documento encontrado com o usuário logado");
+    }
+  } catch (error) {
+    console.error("Erro ao buscar o nome da loja:", error);
+  }
+}
+
 export async function checkIfAccExists(mailValue, passwordValue) {
   try {
     const q = query(
@@ -73,6 +95,4 @@ export async function createUser(fields: Record<string, any>) {
   } catch (error) {
     console.error("Erro ao criar usuário: ", error);
   }
-
-  //   console.log({ p1, p2 });
 }
