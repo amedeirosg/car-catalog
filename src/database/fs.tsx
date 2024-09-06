@@ -82,9 +82,9 @@ export async function loginWithEmail(email: string,password:string) {
 export async function getInfoUser(){
 
   const user = auth.currentUser
-  
-  let userData = null
 
+  let userData = null
+  
   if (user){
 
     const uid = user.uid

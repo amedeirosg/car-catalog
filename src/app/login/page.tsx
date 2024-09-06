@@ -1,18 +1,41 @@
 "use client";
-import { useState } from "react";
-import { loginWithEmail } from "@/database/fs";
+import { useContext, useEffect, useState } from "react";
+import { getInfoUser, loginWithEmail } from "@/database/fs";
 import { ChevronLeft } from "lucide-react";
 import { useHandleBack } from "../Components/HandleBack/handleBack";
 import { useHandleNext } from "../Components/HandleNext/handleNext";
+import { InfoContext } from "../Components/ContextProvider/contextProvider";
 import RegisterHeader from "../Components/RegisterHeader/registerHeader";
 import "./Login.css";
 
 export default function Login() {
   const [getEmail, setGetEmail] = useState("");
   const [getPass, setGetPass] = useState("");
+  const {nameOfStore,setNameOfStore} = useContext(InfoContext)
   const handleBack = useHandleBack();
   const handleNext = useHandleNext({ route: "/cadastro-catalogo" });
+  const handleCadastro = useHandleNext({route: "/cadastro"})
+  const handleLogin = async () => {
+    try {
 
+      const res = await loginWithEmail(getEmail,getPass)
+
+      if(res){
+
+        const userInfo = await getInfoUser()
+
+        setNameOfStore(userInfo)
+
+        handleNext();
+
+      }
+
+    } catch (err){
+
+      console.error('Erro na função handleLogin() no componente Login:', err)
+
+    }
+  }
 
   return (
     <div className="LoginContainer">
@@ -41,15 +64,7 @@ export default function Login() {
               onChange={(e) => setGetPass(e.target.value)}
             />
           </div>
-          <button onClick={() => loginWithEmail(getEmail,getPass).then((res)=>{
-
-            if (res){
-
-              window.location.assign("/cadastro-catalogo");
-
-            }
-
-          })} className="login">
+          <button onClick={handleLogin}className="login">
             Entrar
           </button>
         </div>
@@ -57,7 +72,7 @@ export default function Login() {
         <span
           id="register"
           onClick={() => {
-            window.location.assign("/cadastro");
+            handleCadastro()
           }}
         >
           Cadastre-se
