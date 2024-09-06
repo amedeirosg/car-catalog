@@ -5,8 +5,8 @@ import InputMask from "react-input-mask";
 import { useContext, useState } from "react";
 import { validateRequiredFields } from "../functions";
 import { InfoContext } from "../Components/ContextProvider/contextProvider";
+import { createAcc, createUser } from "@/database/fs";
 import "./StoreRegister.css";
-import { createUser } from "@/database/fs";
 
 export default function StoreRegister() {
   //@ts-ignore
@@ -66,7 +66,19 @@ export default function StoreRegister() {
       };
 
       setInfoAcc(updateInfo);
-      createUser(updateInfo);
+
+      createAcc(infoAcc.mail, infoAcc.password).then((res) => {
+
+        updateInfo.id = res.uid;
+
+        delete updateInfo.password
+
+        delete updateInfo.confPass
+        
+        createUser(updateInfo)
+
+      })
+ 
     }
   };
 

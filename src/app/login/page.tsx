@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { checkIfAccExists } from "@/database/fs";
+import { loginWithEmail } from "@/database/fs";
 import { ChevronLeft } from "lucide-react";
 import { useHandleBack } from "../Components/HandleBack/handleBack";
 import { useHandleNext } from "../Components/HandleNext/handleNext";
@@ -12,17 +12,7 @@ export default function Login() {
   const [getPass, setGetPass] = useState("");
   const handleBack = useHandleBack();
   const handleNext = useHandleNext({ route: "/cadastro-catalogo" });
-  const handleCheckAcc = async () => {
-    try {
-      const existsAcc = await checkIfAccExists(getEmail, getPass);
-      if (existsAcc) {
-        handleNext();
-      }
-      console.log(existsAcc);
-    } catch (error) {
-      console.error("Erro ao verificar o e-mail:", error);
-    }
-  };
+
 
   return (
     <div className="LoginContainer">
@@ -51,7 +41,15 @@ export default function Login() {
               onChange={(e) => setGetPass(e.target.value)}
             />
           </div>
-          <button onClick={handleCheckAcc} className="login">
+          <button onClick={() => loginWithEmail(getEmail,getPass).then((res)=>{
+
+            if (res){
+
+              window.location.assign("/cadastro-catalogo");
+
+            }
+
+          })} className="login">
             Entrar
           </button>
         </div>

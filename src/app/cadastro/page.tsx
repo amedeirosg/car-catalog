@@ -6,7 +6,6 @@ import { useHandleBack } from "../Components/HandleBack/handleBack";
 import { useHandleNext } from "../Components/HandleNext/handleNext";
 import { validateRequiredFields } from "../../app/functions";
 import { InfoContext } from "../Components/ContextProvider/contextProvider";
-import { createAcc } from "@/database/fs";
 import RegisterHeader from "../Components/RegisterHeader/registerHeader";
 //@ts-ignore
 import InputMask from "react-input-mask";
@@ -82,8 +81,9 @@ export default function Register() {
     setErrors(newErrors);
 
     if (Object.keys(newErrors).length === 0) {
+      
       try {
-        createAcc(mail, password).then((res) => {
+        
           setInfoAcc({
             name,
             lastName,
@@ -92,13 +92,14 @@ export default function Register() {
             phone,
             password,
             confPass,
-            id: res.uid,
           });
-        });
-
+       
         window.location.assign("/cadastro-loja");
+
       } catch (err) {
+
         console.error("Erro na função validateAll() na tela de cadastro:", err);
+
       }
     }
   };
