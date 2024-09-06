@@ -5,7 +5,7 @@ export default function Footer() {
   return (
     <div className="FooterContainer">
       <div className="FooterRightsReserved">
-        <Image src={Logo} width={200} height={200} alt={""} />
+        <img src={Logo.src} width={200} height={200} alt={""} />
         <p>© 2024 AutoCatalog, Inc. Todos os direitos reservados.</p>
       </div>
       <div className="FooterNav">

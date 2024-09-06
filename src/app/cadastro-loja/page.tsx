@@ -1,13 +1,15 @@
 "use client";
 import RegisterHeader from "../Components/RegisterHeader/registerHeader";
+//@ts-ignore
 import InputMask from "react-input-mask";
 import { useContext, useState } from "react";
-import { validateRequiredFields, teste } from "../functions";
+import { validateRequiredFields } from "../functions";
 import { InfoContext } from "../Components/ContextProvider/contextProvider";
 import "./StoreRegister.css";
 import { createUser } from "@/database/fs";
 
 export default function StoreRegister() {
+  //@ts-ignore
   const { infoAcc, setInfoAcc } = useContext(InfoContext);
   const [cep, setCep] = useState("");
   const [state, setState] = useState("");
@@ -30,6 +32,7 @@ export default function StoreRegister() {
   const validateAll = () => {
     const newErrors = {};
     const cepError = validateCEP();
+    //@ts-ignore
     if (cepError) newErrors.cep = cepError;
 
     const requiredFieldsError = validateRequiredFields({
@@ -42,6 +45,7 @@ export default function StoreRegister() {
       complement,
       nameOfStore,
     });
+    //@ts-ignore
     if (requiredFieldsError) newErrors.requiredFields = requiredFieldsError;
 
     setErrors(newErrors);

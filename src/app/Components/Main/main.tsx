@@ -4,10 +4,7 @@ import Image from "next/image";
 import ImageMain from "../../../../public/assets/carMainPage.png";
 import Header from "../Header/header";
 import { useHandleNext } from "../HandleNext/handleNext";
-import { useState } from "react";
 export default function Main() {
-  const handleNext = (page: string) => useHandleNext({ route: page });
-
   return (
     <div className="Header">
       <Header />
@@ -18,16 +15,19 @@ export default function Main() {
             <p>Facilitando a criação de catálogos para sua loja de carros</p>
           </div>
           <div className="MainBtns">
-            <button id="btnCadastro" onClick={handleNext("/cadastro")}>
+            <button
+              id="btnCadastro"
+              onClick={useHandleNext({ route: "/cadastro" })}
+            >
               Cadastrar agora
             </button>
-            <button id="btnSobre" onClick={handleNext("/login")}>
+            <button id="btnSobre" onClick={useHandleNext({ route: "/login" })}>
               Acessar
             </button>
           </div>
         </div>
         <div className="MainImage">
-          <Image src={ImageMain} width={630} height={515} alt="car image" />
+          <img src={ImageMain.src} width={630} height={515} alt="car image" />
         </div>
       </div>
     </div>

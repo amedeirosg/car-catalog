@@ -12,7 +12,7 @@ export default function Header() {
   return (
     <div className="HeaderContainer">
       <div className="HeaderLogo">
-        <Image src={Logo} alt="Logo da empresa" width={80} height={80} />
+        <img src={Logo.src} alt="Logo da empresa" width={80} height={80} />
         <h1>AutoCatalog</h1>
       </div>
       <div className="HeaderNav">

@@ -3,13 +3,16 @@ import "./Register.css";
 import { useContext, useEffect, useRef, useState } from "react";
 import { ChevronLeft } from "lucide-react";
 import { useHandleBack } from "../Components/HandleBack/handleBack";
+import { useHandleNext } from "../Components/HandleNext/handleNext";
 import { validateRequiredFields } from "../../app/functions";
 import { InfoContext } from "../Components/ContextProvider/contextProvider";
+import { createAcc } from "@/database/fs";
 import RegisterHeader from "../Components/RegisterHeader/registerHeader";
-import Link from "next/link";
+//@ts-ignore
 import InputMask from "react-input-mask";
 
 export default function Register() {
+  //@ts-ignore
   const { infoAcc, setInfoAcc } = useContext(InfoContext);
   const [name, setName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -21,8 +24,7 @@ export default function Register() {
   const [errors, setErrors] = useState({});
   const regexMail = /^[\w\.-]+@[a-zA-Z\d\.-]+\.[a-zA-Z]{2,}$/;
   const [selectedOption, setSelectedOption] = useState("natural");
-
-  const handleBack = useHandleBack()
+  const handleBack = useHandleBack();
 
   const validateEmail = () => {
     if (!regexMail.test(mail)) {
@@ -59,9 +61,11 @@ export default function Register() {
   const validateAll = () => {
     const newErrors = {};
     const emailError = validateEmail();
+    //@ts-ignore
     if (emailError) newErrors.email = emailError;
 
     const passwordError = validatePassword(password);
+    //@ts-ignore
     if (passwordError) newErrors.password = passwordError;
 
     const requiredFieldsError = validateRequiredFields({
@@ -72,18 +76,30 @@ export default function Register() {
       phone,
       password,
     });
+    //@ts-ignore
     if (requiredFieldsError) newErrors.requiredFields = requiredFieldsError;
 
     setErrors(newErrors);
 
-    // if there are no errors, create the account
     if (Object.keys(newErrors).length === 0) {
-      setInfoAcc({ name, lastName, cpfCnpj, mail, phone, password });
-      window.location.assign("/cadastro-loja");
-      // setTimeout(() => {
-      //   window.location.assign("/cadastro-loja");
-      // }, 1500);
-      // createUser({ name, lastName, cpfCnpj, mail, phone, password });
+      try {
+        createAcc(mail, password).then((res) => {
+          setInfoAcc({
+            name,
+            lastName,
+            cpfCnpj,
+            mail,
+            phone,
+            password,
+            confPass,
+            id: res.uid,
+          });
+        });
+
+        window.location.assign("/cadastro-loja");
+      } catch (err) {
+        console.error("Erro na função validateAll() na tela de cadastro:", err);
+      }
     }
   };
 
@@ -94,18 +110,6 @@ export default function Register() {
         <div className="RegisterInfo">
           <div className="RegisterBack">
             <div className="RegisterIconBack" onClick={handleBack}>
-              {/* <Link
-                href="/"
-                style={{
-                  all: "unset",
-                  display: "flex",
-                  alignItems: "center",
-                  cursor: "pointer",
-                }}
-              >
-                <ChevronLeft />
-                <span>Voltar</span>
-              </Link> */}
               <ChevronLeft />
               <span>Voltar</span>
             </div>
