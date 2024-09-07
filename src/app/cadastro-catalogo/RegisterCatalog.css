@@ -1,8 +1,8 @@
 .RegisterCatalogContainer{
     display:flex;
-    flex-direction: column;
     gap:2rem;
-    height: 100vh;
+    height: 100%;
+    margin-bottom:5rem;
 }
 
 .RegisterCatalogTitle{
@@ -18,7 +18,7 @@
 .RegisterCatalogLeftMenu{
     width: 15%;
     background: rgb(194, 194, 194);
-    height: 100vh;
+    
     display:flex;
     flex-direction: column;
     gap:2rem;
@@ -42,11 +42,8 @@
 
 .RegisterCatalogNav{
     padding:.5rem 1rem;
-}
-
-.RegisterCatalogNav{
     display:flex;
     align-items: center;
     gap:.5rem;
-    
+    cursor:pointer;
 }

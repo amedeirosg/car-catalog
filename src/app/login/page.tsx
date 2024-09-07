@@ -1,6 +1,6 @@
 "use client";
 import { useContext, useEffect, useState } from "react";
-import { getInfoUser, loginWithEmail } from "@/database/fs";
+import { getInfoUser, loginWithEmail, observerUser } from "@/database/fs";
 import { ChevronLeft } from "lucide-react";
 import { useHandleBack } from "../Components/HandleBack/handleBack";
 import { useHandleNext } from "../Components/HandleNext/handleNext";
@@ -36,6 +36,7 @@ export default function Login() {
 
     }
   }
+
 
   return (
     <div className="LoginContainer">

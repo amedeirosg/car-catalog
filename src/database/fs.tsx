@@ -7,7 +7,14 @@ import {
   where,
   getDocs,
 } from "firebase/firestore";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword} from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
+
+
+interface UserData {
+
+  nameOfStore: string
+
+}
 
 const firebaseApp = initializeApp({
 
@@ -21,7 +28,7 @@ const db = getFirestore(firebaseApp);
 
 const userCollectionRef = collection(db, "users");
 
-const auth = getAuth(firebaseApp);
+export const auth = getAuth(firebaseApp);
 
 export const createAcc = (email: string, password: string) =>
 
@@ -67,7 +74,7 @@ export async function loginWithEmail(email: string,password:string) {
 
     console.log('Usuário autenticado:', user)
 
-    return true
+    return user
     
   } catch (err) {
 
@@ -79,17 +86,15 @@ export async function loginWithEmail(email: string,password:string) {
 }
 
 
-export async function getInfoUser(){
-
-  const user = auth.currentUser
-
+export async function getInfoUser(userId:Object){
   let userData = null
+
   
-  if (user){
+  if (userId ){
 
-    const uid = user.uid
 
-    const q = query(userCollectionRef, where('id', '==',uid))
+
+    const q = query(userCollectionRef, where('id', '==',userId))
     //Run the query
     const querySnapShot = await getDocs(q);
     //Check if there is documents 
@@ -98,8 +103,11 @@ export async function getInfoUser(){
       userData = doc.data()
 
     })
- 
-  } else {
+
+
+  } 
+  
+  else {
 
     console.log("Nenhum usuário logado.")
 
@@ -108,7 +116,13 @@ export async function getInfoUser(){
   if (userData){
     
     return userData.nameOfStore;
-
+    
   }
 
+
 }
+
+
+
+  
+  

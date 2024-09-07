@@ -1,0 +1,28 @@
+.CatalogPricesContainer{
+    width: 100%;
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.CatalogEditCards{
+    width: 90%;
+    display:grid;
+    gap:5rem;
+    grid-template-columns: repeat(4,auto);
+    margin: 5rem 2rem;
+    justify-content: space-between;
+}
+
+.BtnAddCar{
+
+    all:unset;
+    padding: 1.25rem 3rem;
+    color:white;
+    font-family: 'Work Sans';
+    font-weight: 500;
+    cursor: pointer;
+    background: #FC5D0D;
+
+}
