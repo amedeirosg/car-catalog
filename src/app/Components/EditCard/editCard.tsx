@@ -4,7 +4,7 @@ import Image from "next/image";
 import CarTest from "../../../../public/assets/sellVehicle.png";
 import { InfoContext } from "../ContextProvider/contextProvider";
 
-export default function Card() {
+export default function Card({ onClick, selected }) {
   const {
     name,
     setName,
@@ -19,7 +19,14 @@ export default function Card() {
   } = useContext(InfoContext);
 
   return (
-    <div className="CardContainer">
+    <div
+      className="CardContainer"
+      onClick={onClick}
+      style={{
+        border: selected ? "1px solid red" : "none",
+        cursor: "pointer",
+      }}
+    >
       <Image src={CarTest} alt={"imagem do veículo"} width={269} height={207} />
       <div className="CardCarInfo">
         {/* Inputs para editar os valores */}

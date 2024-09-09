@@ -37,6 +37,19 @@
     background: #000;
 }
 
+
+.BtnDeleteCard {
+
+    all:unset;
+    padding: 1.25rem 3rem;
+    color:#000;
+    font-family: 'Work Sans';
+    font-weight: 500;
+    cursor: pointer;
+    border:1.5px solid #000;
+
+}
+
 .CatalogPricesBtns{
     display: flex;
     gap:2rem;

@@ -11,14 +11,13 @@ import "./Login.css";
 export default function Login() {
   const [getEmail, setGetEmail] = useState("");
   const [getPass, setGetPass] = useState("");
-  const {nameOfStore,setNameOfStore} = useContext(InfoContext)
+  const { nameOfStore, setNameOfStore } = useContext(InfoContext);
   const handleBack = useHandleBack();
   const handleNext = useHandleNext({ route: "/cadastro-catalogo" });
-  const handleCadastro = useHandleNext({route: "/cadastro"})
+  const handleCadastro = useHandleNext({ route: "/cadastro" });
   const handleLogin = async () => {
     try {
-
-      const res = await loginWithEmail(getEmail,getPass)
+      const res = await loginWithEmail(getEmail, getPass);
 
       // if(res){
 
@@ -30,13 +29,11 @@ export default function Login() {
 
       // }
 
-    } catch (err){
-
-      console.error('Erro na função handleLogin() no componente Login:', err)
-
+      handleNext();
+    } catch (err) {
+      console.error("Erro na função handleLogin() no componente Login:", err);
     }
-  }
-
+  };
 
   return (
     <div className="LoginContainer">
@@ -65,7 +62,7 @@ export default function Login() {
               onChange={(e) => setGetPass(e.target.value)}
             />
           </div>
-          <button onClick={handleLogin}className="login">
+          <button onClick={handleLogin} className="login">
             Entrar
           </button>
         </div>
@@ -73,7 +70,7 @@ export default function Login() {
         <span
           id="register"
           onClick={() => {
-            handleCadastro()
+            handleCadastro();
           }}
         >
           Cadastre-se
