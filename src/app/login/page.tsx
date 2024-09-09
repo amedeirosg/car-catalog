@@ -20,15 +20,15 @@ export default function Login() {
 
       const res = await loginWithEmail(getEmail,getPass)
 
-      if(res){
+      // if(res){
 
-        const userInfo = await getInfoUser()
+      //   const userInfo = await getInfoUser()
 
-        setNameOfStore(userInfo)
+      //   setNameOfStore(userInfo)
 
-        handleNext();
+      //   handleNext();
 
-      }
+      // }
 
     } catch (err){
 

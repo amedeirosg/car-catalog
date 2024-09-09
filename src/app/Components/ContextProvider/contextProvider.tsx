@@ -5,39 +5,37 @@ import { createContext, useState, ReactNode, useEffect } from "react";
 
 export const InfoContext = createContext({});
 
-export const InfoProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+export const InfoProvider: React.FC<{ children: ReactNode }> = ({
+  children,
+}) => {
+  const [name, setName] = useState<string>("");
+  const [price, setPrice] = useState<string>("");
+  const [year, setYear] = useState<string>("");
+  const [km, setKm] = useState<string>("");
+  const [local, setLocal] = useState<string>("");
 
+  const [userId, setUserId] = useState<Object>();
 
-  const [userId,setUserId] = useState<Object>()
-
-  useEffect(()=>{
-
+  useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-  
-        const uid = user.uid; 
-        setUserId(uid)
-
-      } 
+        const uid = user.uid;
+        setUserId(uid);
+      }
     });
+  }, []);
 
-
-  },[])
-
-
-  
   const [infoAcc, setInfoAcc] = useState(() => {
     if (typeof window !== "undefined") {
       const savedInfo = localStorage.getItem("infoAcc");
       return savedInfo ? JSON.parse(savedInfo) : {};
     }
-    return {}; 
+    return {};
   });
 
-
   const [nameOfStore, setNameOfStore] = useState<string | null>(() => {
-    if (typeof window !== 'undefined') {
-      const savedInfo = localStorage.getItem('nameOfStore');
+    if (typeof window !== "undefined") {
+      const savedInfo = localStorage.getItem("nameOfStore");
       return savedInfo ? savedInfo : null;
     }
     return null;
@@ -50,7 +48,26 @@ export const InfoProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   }, [infoAcc]);
 
   return (
-    <InfoContext.Provider value={{ infoAcc, setInfoAcc, nameOfStore, setNameOfStore, userId, setUserId}}>
+    <InfoContext.Provider
+      value={{
+        infoAcc,
+        setInfoAcc,
+        nameOfStore,
+        setNameOfStore,
+        userId,
+        setUserId,
+        name,
+        setName,
+        price,
+        setPrice,
+        year,
+        setYear,
+        km,
+        setKm,
+        local,
+        setLocal,
+      }}
+    >
       {children}
     </InfoContext.Provider>
   );

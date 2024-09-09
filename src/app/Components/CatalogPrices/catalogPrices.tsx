@@ -1,29 +1,37 @@
-import { useState } from 'react'
-import Card from '../Card/card'
-import './CatalogPrices.css'
+import { useContext, useState } from "react";
+import { InfoContext } from "../ContextProvider/contextProvider";
+import EditCard from "../EditCard/editCard";
+import "./CatalogPrices.css";
+import { updateUser } from "@/database/fs";
+export default function CatalogPrices() {
+  const { name, price, year, km, local, userId } = useContext(InfoContext);
 
+  const [card, setCard] = useState([]);
+  const addCard = () => {
+    setCard([...card, card.length + 1]);
+  };
 
-export default function CatalogPrices(){
+  const saveChanges = () => {
 
-    const [card, setCard] = useState([])
+    updateUser(userId,name,price,year,km,local)
 
-    const addCard = () => {
+  };
 
-        setCard([...card, card.length + 1]);
-
-    }
-
-    return (
-
-        <div className="CatalogPricesContainer"> 
-            <div className="CatalogEditCards">
-                {card.map((card, index) => (
-                    <Card key={index} />
-                ))}
-            </div>
-           <button className="BtnAddCar" onClick={addCard}>Adicionar Carro</button>
-        </div>
-          
-    )
-
+  return (
+    <div className="CatalogPricesContainer">
+      <div className="CatalogEditCards">
+        {card.map((card, index) => (
+          <EditCard key={index} />
+        ))}
+      </div>
+      <div className="CatalogPricesBtns">
+        <button className="BtnAddCar" onClick={addCard}>
+          Adicionar Carro
+        </button>
+        <button className="BtnSaveChanges" onClick={saveChanges}>
+          Salvar
+        </button>
+      </div>
+    </div>
+  );
 }

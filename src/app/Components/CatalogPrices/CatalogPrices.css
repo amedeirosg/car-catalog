@@ -26,3 +26,18 @@
     background: #FC5D0D;
 
 }
+
+.BtnSaveChanges{
+    all:unset;
+    padding: 1.25rem 3rem;
+    color:white;
+    font-family: 'Work Sans';
+    font-weight: 500;
+    cursor: pointer;
+    background: #000;
+}
+
+.CatalogPricesBtns{
+    display: flex;
+    gap:2rem;
+}
