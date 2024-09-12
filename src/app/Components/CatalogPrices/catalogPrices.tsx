@@ -5,57 +5,76 @@ import "./CatalogPrices.css";
 import { updateUser } from "@/database/fs";
 import { validateRequiredFields } from "@/app/functions";
 export default function CatalogPrices() {
-  const { name, price, year, km, local, userId } = useContext(InfoContext);
   const [err, setErr] = useState({});
-  const [card, setCard] = useState([]);
-  const addCard = () => {
-    setCard([...card, card.length + 1]);
-  };
 
-  const [selectedIndex, setSelectedIndex] = useState(null);
+  const { userId } = useContext(InfoContext);
+
+  const [cards, setCards] = useState([]);
 
   const saveChanges = () => {
     const newErrors = {};
+
     const requiredFieldsError = validateRequiredFields({
-      name,
-      price,
-      year,
-      km,
-      local,
+      name: cards[0].name,
+      price: cards[0].price,
+      year: cards[0].year,
+      km: cards[0].km,
+      local: cards[0].local,
     });
 
     if (requiredFieldsError) {
       newErrors.requiredFields = requiredFieldsError;
+
       setErr(newErrors);
     } else {
-      updateUser(userId, name, price, year, km, local);
+      setErr(newErrors);
+      cards.map((card, index) => {
+        updateUser(
+          userId,
+          card.name,
+          card.price,
+          card.year,
+          card.km,
+          card.local,
+          index
+        );
+      });
     }
-    setErr(newErrors);
   };
 
-  const handleSelectDiv = (index: any) => {
-    setSelectedIndex(index);
+  const handleInputChange = (index, field, value) => {
+    const updatedCards = [...cards];
+
+    if (updatedCards[index]) {
+      updatedCards[index][field] = value;
+      setCards(updatedCards);
+    } else {
+      console.error(`Índice ${index} não existe no array de cards.`);
+    }
+  };
+
+  const addCard = () => {
+    setCards([...cards, { name: "", price: "", year: "", km: "", local: "" }]);
   };
 
   const deleteCard = () => {
-    if (selectedIndex !== null) {
-      const updatedCards = card.filter((_, index) => index !== selectedIndex);
-      setCard(updatedCards);
-      setSelectedIndex(null);
-    }
+    return "delete";
   };
 
   return (
     <div className="CatalogPricesContainer">
       <div className="CatalogEditCards">
-        {card.map((_, index) => (
-          <EditCard
-            onClick={() => {
-              handleSelectDiv(index);
-            }}
-            key={index}
-            selected={selectedIndex === index}
-          />
+        {cards.map((card, index) => (
+          <div className="EditCardsGrid" key={index}>
+            <EditCard
+              name={card.name}
+              price={card.price}
+              year={card.year}
+              km={card.km}
+              local={card.local}
+              onInputChange={handleInputChange}
+            />
+          </div>
         ))}
       </div>
       <div className="CatalogPricesBtns">

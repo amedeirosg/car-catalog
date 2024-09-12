@@ -15,6 +15,7 @@ import {
   signInWithEmailAndPassword,
   onAuthStateChanged,
 } from "firebase/auth";
+import { ParkingCircleOff } from "lucide-react";
 
 interface UserData {
   nameOfStore: string;
@@ -61,24 +62,35 @@ export async function updateUser(
   price: String,
   year: String,
   km: String,
-  local: String
+  local: String,
+  index: number
 ) {
   const q = query(userCollectionRef, where("id", "==", userId));
 
   try {
     const querySnapshot = await getDocs(q);
 
+    const cardData = {
+      [index]: {
+        nameOfCar: name,
+        priceOfCar: price,
+        yearOfCar: year,
+        kmOfCar: km,
+        localCar: local,
+      },
+    };
+
     if (!querySnapshot.empty) {
       querySnapshot.forEach(async (documento) => {
         const docRef = doc(db, "users", documento.id);
-
-        // Atualiza o documento com novos campos
         await updateDoc(docRef, {
-          "Card1.nameCar": name,
-          "Card1.priceCar": price,
-          "Card1.yearCar": year,
-          "Card1.kmCar": km,
-          "Card1.localCar": local,
+          ["Card" + index]: {
+            nameOfCar: name,
+            priceOfCar: price,
+            yearOfCar: year,
+            kmOfCar: km,
+            localCar: local,
+          },
         });
 
         console.log(

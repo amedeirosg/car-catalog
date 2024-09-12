@@ -11,7 +11,6 @@ import "./Login.css";
 export default function Login() {
   const [getEmail, setGetEmail] = useState("");
   const [getPass, setGetPass] = useState("");
-  const { nameOfStore, setNameOfStore } = useContext(InfoContext);
   const handleBack = useHandleBack();
   const handleNext = useHandleNext({ route: "/cadastro-catalogo" });
   const handleCadastro = useHandleNext({ route: "/cadastro" });

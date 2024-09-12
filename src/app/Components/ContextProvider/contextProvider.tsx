@@ -8,14 +8,7 @@ export const InfoContext = createContext({});
 export const InfoProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
-  const [name, setName] = useState<string>("");
-  const [price, setPrice] = useState<string>("");
-  const [year, setYear] = useState<string>("");
-  const [km, setKm] = useState<string>("");
-  const [local, setLocal] = useState<string>("");
-
   const [userId, setUserId] = useState<Object>();
-
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
@@ -56,16 +49,6 @@ export const InfoProvider: React.FC<{ children: ReactNode }> = ({
         setNameOfStore,
         userId,
         setUserId,
-        name,
-        setName,
-        price,
-        setPrice,
-        year,
-        setYear,
-        km,
-        setKm,
-        local,
-        setLocal,
       }}
     >
       {children}
