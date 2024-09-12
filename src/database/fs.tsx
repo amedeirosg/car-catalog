@@ -56,42 +56,16 @@ export async function createUser(fields: Record<string, any>) {
   }
 }
 
-export async function updateUser(
-  userId: Object,
-  name: String,
-  price: String,
-  year: String,
-  km: String,
-  local: String,
-  index: number
-) {
+export async function updateUser(userId: Object, cards) {
   const q = query(userCollectionRef, where("id", "==", userId));
 
   try {
     const querySnapshot = await getDocs(q);
 
-    const cardData = {
-      [index]: {
-        nameOfCar: name,
-        priceOfCar: price,
-        yearOfCar: year,
-        kmOfCar: km,
-        localCar: local,
-      },
-    };
-
     if (!querySnapshot.empty) {
       querySnapshot.forEach(async (documento) => {
         const docRef = doc(db, "users", documento.id);
-        await updateDoc(docRef, {
-          ["Card" + index]: {
-            nameOfCar: name,
-            priceOfCar: price,
-            yearOfCar: year,
-            kmOfCar: km,
-            localCar: local,
-          },
-        });
+        await updateDoc(docRef, cards);
 
         console.log(
           `Novos valores adicionados com sucesso no documento ${documento.id}!`
