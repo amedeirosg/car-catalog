@@ -1,17 +1,15 @@
 import "./CatalogPrices.css";
 import Image from "next/image";
 import CarTest from "../../../../public/assets/sellVehicle.png";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { InfoContext } from "../ContextProvider/contextProvider";
-import { updateUser } from "@/database/fs";
+import { getInfoUser, updateUser } from "@/database/fs";
 import { validateRequiredFields } from "@/app/functions";
 
 export default function CatalogPrices() {
   const [err, setErr] = useState({});
 
   const { userId } = useContext(InfoContext);
-
-  const [errors, setErrors] = useState(null);
 
   const [cards, setCards] = useState([
     { name: "", price: "", year: "", km: "", local: "" },
@@ -23,7 +21,6 @@ export default function CatalogPrices() {
 
   const saveChanges = () => {
     const newErrors = {};
-    console.log("x");
 
     cards.map((card, index) => {
       const requiredFieldsError = validateRequiredFields({
@@ -38,7 +35,7 @@ export default function CatalogPrices() {
     });
 
     if (Object.keys(newErrors).length > 0) {
-      setErrors(newErrors);
+      setErr(newErrors);
       return;
     }
 
@@ -67,6 +64,28 @@ export default function CatalogPrices() {
     setCards(updatedCards);
   };
 
+  useEffect(() => {
+    getInfoUser(userId)
+      .then((res) => {
+        if (res && res.cards) {
+          const userCards = Object.values(res.cards).map((card) => ({
+            name: card.name,
+            price: card.price,
+            year: card.year,
+            km: card.km,
+            local: card.local,
+          }));
+
+          setCards(userCards);
+        } else {
+          console.error("No cards found or user response is invalid");
+        }
+      })
+      .catch((error) => {
+        console.error("Error fetching user info:", error);
+      });
+  }, [userId]);
+
   return (
     <div className="CatalogPricesContainer">
       <div className="CatalogEditCards">
@@ -82,6 +101,7 @@ export default function CatalogPrices() {
               <div className="CardCarInfo">
                 <input
                   value={card.name}
+                  placeholder="Nome do veículo"
                   onChange={(e) =>
                     handleInputChange(index, "name", e.target.value)
                   }
@@ -89,6 +109,7 @@ export default function CatalogPrices() {
                 <div className="CardCarPrice">
                   <input
                     value={card.price}
+                    placeholder="Preço"
                     onChange={(e) =>
                       handleInputChange(index, "price", e.target.value)
                     }
@@ -98,12 +119,14 @@ export default function CatalogPrices() {
                 <div className="CardYearKm">
                   <input
                     value={card.year}
+                    placeholder="Ano"
                     onChange={(e) =>
                       handleInputChange(index, "year", e.target.value)
                     }
                   />
                   <input
                     value={card.km}
+                    placeholder="Quilometragem"
                     onChange={(e) =>
                       handleInputChange(index, "km", e.target.value)
                     }
@@ -113,6 +136,7 @@ export default function CatalogPrices() {
                 <div className="CardCarLocal">
                   <input
                     value={card.local}
+                    placeholder="Localiadde"
                     onChange={(e) =>
                       handleInputChange(index, "local", e.target.value)
                     }
@@ -133,7 +157,6 @@ export default function CatalogPrices() {
         <button className="BtnSaveChanges" onClick={saveChanges}>
           Salvar
         </button>
-
         {Object.values(err).map((error, index) => (
           <p key={index} style={{ color: "red" }}>
             * {error as string}

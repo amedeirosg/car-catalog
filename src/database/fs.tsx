@@ -15,11 +15,6 @@ import {
   signInWithEmailAndPassword,
   onAuthStateChanged,
 } from "firebase/auth";
-import { ParkingCircleOff } from "lucide-react";
-
-interface UserData {
-  nameOfStore: string;
-}
 
 const firebaseApp = initializeApp({
   apiKey: "AIzaSyCluqF8sRPoq-63GbJNnPrjsr8Phfg7BxA",
@@ -115,6 +110,6 @@ export async function getInfoUser(userId: Object) {
   }
 
   if (userData) {
-    return userData.nameOfStore;
+    return userData;
   }
 }

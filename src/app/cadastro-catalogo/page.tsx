@@ -7,20 +7,21 @@ import { InfoContext } from "../Components/ContextProvider/contextProvider";
 import { getInfoUser } from "@/database/fs";
 import CatalogPrices from "../Components/CatalogPrices/catalogPrices";
 export default function RegisterCatalog() {
-  const [loadPrices, setLoadPrices] = useState(false)
-  const {userId} = useContext(InfoContext)
-  const [nameOfStore, setNameOfStore] = useState(null)
+  const [loadPrices, setLoadPrices] = useState(false);
+  const { userId } = useContext(InfoContext);
+  const [nameOfStore, setNameOfStore] = useState(null);
 
-  useEffect(()=>{
+  useEffect(() => {
+    getInfoUser(userId).then((res) => {
+      if (res && res.nameOfStore) {
+        setNameOfStore(res.nameOfStore);
+      } else {
+        console.error("nameOfStore is undefined");
+      }
 
-     getInfoUser(userId).then((res) => {
-
-      setNameOfStore(res)
-
-    })
-
-  },[userId])
-
+      // console.log(res)
+    });
+  }, [userId]);
 
   return (
     <div className="RegisterCatalogContainer">
@@ -32,17 +33,19 @@ export default function RegisterCatalog() {
         <div className="RegisterCatalogL">
           <p id="subtitle">Desempenho e Vendas</p>
           <div className="RegisterCatalogSubT">
-            <div className="RegisterCatalogNav" onClick={() => {
-              setLoadPrices(true)
-            }}>
+            <div
+              className="RegisterCatalogNav"
+              onClick={() => {
+                setLoadPrices(true);
+              }}
+            >
               <CarFrontIcon />
               <p>Atualizar catálogo</p>
             </div>
           </div>
         </div>
       </div>
-      {loadPrices ? <CatalogPrices/> : ''}
+      {loadPrices ? <CatalogPrices /> : ""}
     </div>
   );
-  
 }

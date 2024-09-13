@@ -77,7 +77,11 @@
     padding:1rem;
 }
 
-
+.CardCarInfo input{
+    border:1px solid #808080;
+    border-radius:.25rem;
+    padding:.25rem;
+}
 
 .CardCarInfo h1 {
     font-family: 'Work Sans';
