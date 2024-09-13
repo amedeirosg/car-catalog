@@ -9,3 +9,14 @@
 :root{
     --tilte-main: 57px;
 }
+
+.LinkStyle{
+    all:unset;
+    cursor: pointer;
+    display:flex;
+    align-items: center;
+}
+
+html {
+    scroll-behavior: smooth;
+  }

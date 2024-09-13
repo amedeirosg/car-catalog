@@ -1,6 +1,7 @@
 "use client";
 import "./Header.css";
 import Logo from "../../../../public/assets/logo.png";
+import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
 import { X } from "lucide-react";
@@ -8,17 +9,26 @@ import { useHandleNext } from "../HandleNext/handleNext";
 export default function Header() {
   const [openMenu, setOpenMenu] = useState(false);
   const handleNext = useHandleNext({ route: "/login" });
-
+  const handleHome = useHandleNext({ route: "/" });
   return (
     <div className="HeaderContainer">
-      <div className="HeaderLogo">
-        <img src={Logo.src} alt="Logo da empresa" width={80} height={80} />
-        <h1>AutoCatalog</h1>
-      </div>
+      <Link href={"/"} className="LinkStyle">
+        <div className="HeaderLogo">
+          <img src={Logo.src} alt="Logo da empresa" width={80} height={80} />
+          <h1>AutoCatalog</h1>
+        </div>
+      </Link>
+
       <div className="HeaderNav">
-        <button>Início</button>
-        <button>Sobre</button>
-        <button>Contato</button>
+        <Link href="/" className="LinkStyle">
+          <button>Início</button>
+        </Link>
+        <Link href="#about" className="LinkStyle">
+          <button>Sobre</button>
+        </Link>
+        <Link href="#about" className="LinkStyle">
+          <button>Contato</button>
+        </Link>
         <button
           id="login"
           onClick={() => {
