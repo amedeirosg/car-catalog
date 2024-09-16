@@ -85,3 +85,32 @@
 #required{
     color:#ff0000;
 }
+
+
+@media (max-width:1000px) {
+
+    .StoreRegisterCEP,.StoreRegisterNeighborhood,.StoreRegisterAddress,.StoreName,.StoreInfo{
+        width: 100%;
+    }
+    
+    .StoreRegisterLocal,.StoreRegisterCity,.StoreRegisterNumberAndComplement{
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .StoreRegisterState ,.StoreRegisterCity,.StoreNumber,.StoreComplement {
+        width: 50%;
+        box-sizing: border-box;
+    }
+
+
+}
+
+
+@media(max-width:660px){
+    .StoreRegisterContainer{
+  
+        padding: 2rem 3rem;
+    
+    }
+}

@@ -1,5 +1,9 @@
 {
   "projects": {
-    "default": "autocatalog-9c002"
-  }
+    "default": "autocatalog-9c002",
+    "autocatalog": "autocatalog-9c002"
+  },
+  "targets": {},
+  "etags": {},
+  "dataconnectEmulatorConfig": {}
 }

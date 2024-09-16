@@ -62,7 +62,7 @@ export default function Header() {
           <X style={{ strokeWidth: "0.3rem" }} />
         </div>
 
-        <Image src={Logo} alt="Logo da empresa" width={120} height={120} />
+        <img src={Logo.src} alt="Logo da empresa" width={120} height={120} />
         <div className="HeaderBurgerOpt">
           <button>Início</button>
           <button>Sobre</button>

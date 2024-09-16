@@ -51,6 +51,7 @@ export async function createUser(fields: Record<string, any>) {
   }
 }
 
+  //@ts-ignore
 export async function updateUser(userId: Object, cards) {
   const q = query(userCollectionRef, where("id", "==", userId));
 
@@ -67,7 +68,7 @@ export async function updateUser(userId: Object, cards) {
         );
       });
     } else {
-      console.log("Nenhum documento encontrado com o campo ID = 444");
+      console.log("Nenhum documento encontrado com o campo ID: ", userId);
     }
   } catch (error) {
     console.error("Erro ao adicionar novos valores: ", error);

@@ -1,6 +1,6 @@
 "use client";
 import { useContext, useEffect, useState } from "react";
-import { getInfoUser, loginWithEmail, observerUser } from "@/database/fs";
+import { getInfoUser, loginWithEmail } from "@/database/fs";
 import { ChevronLeft } from "lucide-react";
 import { useHandleBack } from "../Components/HandleBack/handleBack";
 import { useHandleNext } from "../Components/HandleNext/handleNext";
@@ -17,18 +17,9 @@ export default function Login() {
   const handleLogin = async () => {
     try {
       const res = await loginWithEmail(getEmail, getPass);
-
-      // if(res){
-
-      //   const userInfo = await getInfoUser()
-
-      //   setNameOfStore(userInfo)
-
-      //   handleNext();
-
-      // }
-
-      handleNext();
+      if (res) {
+        handleNext();
+      }
     } catch (err) {
       console.error("Erro na função handleLogin() no componente Login:", err);
     }
@@ -43,7 +34,7 @@ export default function Login() {
             <ChevronLeft />
             <span>Voltar</span>
           </div>
-          <span>Entre na sua conta</span>
+          <span className="LoginSubtitle">Entre na sua conta</span>
         </div>
       </div>
       <hr></hr>

@@ -104,12 +104,26 @@
 
 @media(max-width: 920px){
 
-    
+    .LoginSubtitle {
+        position: absolute; /* Remove o elemento do fluxo normal e permite centralizar */
+        left: 50%; /* Move o elemento para o meio horizontalmente */
+        transform: translateX(-50%); /* Ajusta o elemento para ficar exatamente no centro */
+        font-weight: bold; 
+    }
 
+    .LoginContainer hr{
+        margin-top:3rem;
+    }
+
+    .LoginTitle{
+        width: 100%;
+    }
+    
     .LoginForm{
         width: 80%;
     }
 }
+
 
 @media(max-width:400px){
     .LoginContainer{

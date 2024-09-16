@@ -9,6 +9,7 @@ import { validateRequiredFields } from "@/app/functions";
 export default function CatalogPrices() {
   const [err, setErr] = useState({});
 
+  //@ts-ignore
   const { userId } = useContext(InfoContext);
 
   const [cards, setCards] = useState([
@@ -31,6 +32,7 @@ export default function CatalogPrices() {
         local: card.local,
       });
 
+      //@ts-ignore
       if (requiredFieldsError) newErrors[index] = requiredFieldsError;
     });
 
@@ -40,6 +42,7 @@ export default function CatalogPrices() {
     }
 
     const cardsObject = cards.reduce((acc, card, index) => {
+      //@ts-ignore
       acc[`index${index}`] = card;
       return acc;
     }, {});
@@ -57,9 +60,11 @@ export default function CatalogPrices() {
     setCards((prevCards) => prevCards.filter((_, i) => i !== index));
   };
 
+  //@ts-ignore
   const handleInputChange = (index, field, value) => {
-    console.log([...cards]);
     const updatedCards = [...cards];
+
+    //@ts-ignore
     updatedCards[index][field] = value;
     setCards(updatedCards);
   };
@@ -67,12 +72,19 @@ export default function CatalogPrices() {
   useEffect(() => {
     getInfoUser(userId)
       .then((res) => {
+        //@ts-ignore
         if (res && res.cards) {
+          //@ts-ignore
           const userCards = Object.values(res.cards).map((card) => ({
+            //@ts-ignore
             name: card.name,
+            //@ts-ignore
             price: card.price,
+            //@ts-ignore
             year: card.year,
+            //@ts-ignore
             km: card.km,
+            //@ts-ignore
             local: card.local,
           }));
 

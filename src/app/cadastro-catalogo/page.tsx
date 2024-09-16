@@ -8,18 +8,25 @@ import { getInfoUser } from "@/database/fs";
 import CatalogPrices from "../Components/CatalogPrices/catalogPrices";
 export default function RegisterCatalog() {
   const [loadPrices, setLoadPrices] = useState(false);
+  //@ts-ignore
   const { userId } = useContext(InfoContext);
   const [nameOfStore, setNameOfStore] = useState(null);
 
   useEffect(() => {
     getInfoUser(userId).then((res) => {
-      if (res && res.nameOfStore) {
-        setNameOfStore(res.nameOfStore);
-      } else {
-        console.error("nameOfStore is undefined");
+      //@ts-ignore
+      try {
+        if (res && res.nameOfStore) {
+          //@ts-ignore
+          setNameOfStore(res.nameOfStore);
+        } else {
+          console.error("Nome da loja está indefinido");
+        }
+      } catch (err) {
+        console.error(
+          "Erro ao montar página RegisterCatalog - useEffect(() => {getInfoUser(userId)})"
+        );
       }
-
-      // console.log(res)
     });
   }, [userId]);
 

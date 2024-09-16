@@ -68,17 +68,15 @@ export default function StoreRegister() {
       setInfoAcc(updateInfo);
 
       createAcc(infoAcc.mail, infoAcc.password).then((res) => {
-
+        //@ts-ignore
         updateInfo.id = res.uid;
 
-        delete updateInfo.password
+        delete updateInfo.password;
 
-        delete updateInfo.confPass
-        
-        createUser(updateInfo)
+        delete updateInfo.confPass;
 
-      })
- 
+        createUser(updateInfo);
+      });
     }
   };
 
