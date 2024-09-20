@@ -1,12 +1,14 @@
 "use client";
 import "./RegisterCatalog.css";
 import Logo from "../../../public/assets/logo.png";
-import { CarFrontIcon } from "lucide-react";
+import { CarFrontIcon, X } from "lucide-react";
 import { useContext, useEffect, useState } from "react";
 import { InfoContext } from "../Components/ContextProvider/contextProvider";
 import { getInfoUser } from "@/database/fs";
 import CatalogPrices from "../Components/CatalogPrices/catalogPrices";
 export default function RegisterCatalog() {
+  const [openMenu, setOpenMenu] = useState(false);
+
   const [loadPrices, setLoadPrices] = useState(false);
   //@ts-ignore
   const { userId } = useContext(InfoContext);
@@ -14,8 +16,8 @@ export default function RegisterCatalog() {
 
   useEffect(() => {
     getInfoUser(userId).then((res) => {
-      //@ts-ignore
       try {
+        //@ts-ignore
         if (res && res.nameOfStore) {
           //@ts-ignore
           setNameOfStore(res.nameOfStore);
@@ -32,7 +34,27 @@ export default function RegisterCatalog() {
 
   return (
     <div className="RegisterCatalogContainer">
-      <div className="RegisterCatalogLeftMenu">
+      <div
+        className={`RegisterCatalogMenuMobile ${openMenu ? "open" : ""}`}
+        onClick={() => setOpenMenu(true)}
+      >
+        <div className="RegisterCatalogBurger"></div>
+        <div className="RegisterCatalogBurger"></div>
+        <div className="RegisterCatalogBurger"></div>
+      </div>
+      <div
+        className={`RegisterCatalogLeftMenu ${
+          openMenu ? "mobileMenuOpen" : ""
+        }  `}
+      >
+        <div
+          className="RegisterCatalogBurgerClose"
+          onClick={() => {
+            setOpenMenu(false);
+          }}
+        >
+          <X style={{ strokeWidth: "0.3rem" }} />
+        </div>
         <div className="RegisterCatalogTitle">
           <img src={Logo.src} width={200} height={200} alt="Logo da empresa" />
           <p>{nameOfStore ? nameOfStore : "Carregando..."}</p>

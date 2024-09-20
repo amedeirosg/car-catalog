@@ -133,3 +133,38 @@
     font-size:0.7rem;
     color: #858487;
 }
+
+
+@media (max-width:1650px){
+    .CatalogEditCards{
+        grid-template-columns: repeat(3,auto);
+    }
+}
+
+
+@media(max-width:1270px){
+    .CatalogEditCards{
+        grid-template-columns: repeat(2,auto);
+        justify-content: space-evenly;
+        align-items: center;
+
+    }
+}
+
+
+@media(max-width:840px){
+    .CatalogEditCards{
+        grid-template-columns: repeat(1,auto);
+    }
+
+}
+
+@media(max-width:410px){
+
+    .BtnAddCar,.BtnSaveChanges{
+
+        padding: 1rem 2rem;
+        
+    }
+ 
+}
