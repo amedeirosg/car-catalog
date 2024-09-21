@@ -1,9 +1,12 @@
 .AutoCatalogArea{
+
     display:flex;
     gap:5rem;
+
 }
 
 .AutoCatalogContainer{
+
     padding: 2rem ;
     margin:5rem 0rem 5rem 5rem;
     width: 10%;
@@ -11,73 +14,97 @@
     border-radius:.25rem;
     font-family: 'Work Sans';
     font-weight: 500;
+
 }
 
 .AutoCatalogBrand input{
+
     all:unset;
     height: 2rem;
     padding:0 .5rem;
     border:1px solid #545454;
     border-radius:.25rem;
+
 }
 
 .AutoCatalogFilters{
+
     display:flex;
     flex-direction: column;
     gap:1rem;
+
 }
 
 .AutoCatalogBrand,.AutoCatalogPrice,.AutoCatalogYear,.AutoCatalogKm,.AutoCatalogEngine,.AutoCatalogFuel,.AutoCatalogColors{
+
     display:flex;
     flex-direction: column;
     gap:.5rem;
+
 }
 
 .AutoCatalog0Km,.AutoCatalogColor{
+
     display:flex;
     gap:.5rem;
     align-items: center;
+
 }
 
 .AutoCatalog0Km{
+
     flex-direction: column;
     align-items: start;
+
 }
 
 .PriceRange,.YearRange,.FuelType,.AutoCatalog1-0, .AutoCatalog1-6,.Okm,.Anyone,.AutoCatalogAnyone{
+
     display:flex;
     gap:.5rem;
+
 }
 
 .PriceRange input,.YearRange input{
+
     width: 50%;
+
 }
 
 .AutoCatalog1-0,.AutoCatalog1-6,.FuelType, .AutoCatalogColor span{
+
     font-weight: normal;
+
 }
 
 
 input::placeholder{
+
     font-size:.8rem;
     font-weight: normal;
     color: rgb(84, 84, 84, 0.6);
+
 }
 
 label{
+
     cursor: pointer;
+
 }
 
 #Brand,#Km{
+
     all:unset;
     height: 2rem;
     padding:0 .5rem;
     border:1px solid #545454;
     border-radius:.25rem;
     color: rgba(0, 0, 0, 0.6);
+
 }
 
 #YearFrom,#YearTo,#PriceFrom,#PriceTo{
+
     all:unset;
     width: 50%;
     padding:0 .5rem;
@@ -85,56 +112,76 @@ label{
     border:1px solid #545454;
     border-radius:.25rem;
     color: rgba(0, 0, 0, 0.6);
+
 }
 
 #Brand:focus,#Km:focus,#YearFrom:focus,#YearTo:focus,#PriceFrom:focus,#PriceTo:focus{
+
     border-color:rgba(67, 9, 213, 0.781);
     box-shadow: 0 0 5px rgba(67, 9, 213, 0.781);
+
 }
 
 .Cards{
+
     margin: 5rem 5rem 0rem 5rem;
     width: 100%;;
     display:grid;
     grid-template-columns: repeat(4,auto);
     align-items: center;
     gap:1rem;
+
 }
 
 .AutoCatalogFilterMobile{
+
     display:none;
+
 }
 
 .FilterTitleClose{
+
     display:flex;
     align-items: center;
     justify-content: space-between;
+
 }
 
 .FilterMobile{
+
     display:none;
+
 }
 
 
 @media (max-width:1624px){
+
     .Cards{
+
         grid-template-columns: repeat(3,auto);
+
     }
 }
 
 @media(max-width:1300px){
+
     .Cards{
+
         justify-content: center;
         gap:5rem;
         margin-top:7rem;
         margin-bottom:7rem;
+
     }
 
     .AutoCatalogContainer{
+
         display:none;
+
     }
 
     .AutoCatalogFilterMobile{
+
         position: absolute;
         margin:2rem 0rem 0rem 8rem;
         display:flex;
@@ -146,9 +193,11 @@ label{
         justify-content: center;
         align-items: center;
         gap:1rem;
+
     }
 
     .FilterMobile{
+
         position:absolute;
         width: 100%;
         height: 100vh;
@@ -156,9 +205,11 @@ label{
         justify-content: center;
         margin-top:5rem;
         backdrop-filter: blur(1330px); /* Desfoque do fundo */
+
     }
 
     .FilterMobileArea{
+
         box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
         background: #fff;
         height: fit-content;
@@ -171,24 +222,29 @@ label{
         flex-direction: column;
         gap:1rem;
         backdrop-filter: blur(10px); /* Desfoque do fundo */
+
     }
 
-    .AutoCatalogArea.overlay{
-    }
 }
 
 
 @media (max-width:1100px){
+
     .Cards{
+
         grid-template-columns: repeat(2,auto);
         margin:10rem 0 5rem 0;
         padding:.5rem;
+
     }
 }
 
 
 @media(max-width:622px){
+
     .Cards{
+        
         grid-template-columns: repeat(1,auto);
+
     }
 }

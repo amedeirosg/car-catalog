@@ -1,141 +1,182 @@
 .RegisterContainer{
+
     display:flex;
     flex-direction: column;
     gap:5rem;
     padding: 0 10rem;
     padding-bottom:5rem;
+
 }
 
 .RegisterTitle{
+
     display:flex;
     flex-direction: column;
     align-items: center;
     gap:5rem;
+
 }
 
 .RegisterBack{
+
     display:flex;
     align-items: center;
     justify-content: center;
     width: 100%;
     position:relative;
+
 }
 
 .RegisterIconBack {
+
     position: absolute;
     display:flex;
     align-items: center;
     left:0;
     font-size:18px;
     cursor: pointer;
+
 }
 
 .RegisterInfo{
+
     display:flex;
     flex-direction: column;
     align-items: center;
     gap:1rem;
+
 }
 
 .RegisterTitle h1{
+
     font-family: 'Playfair Display';
     font-weight: 500;
     font-size: 2.5rem;
     color:#3B383B;
+
 }
 
 .RegisterTitle hr{
+
     width: 100%;
     height: 1px;
     background: #858487;
+
 }
 
 .RegisterTitle p{
+
     font-family: 'Work Sans';
     font-size:1.125rem;
     color:#858487;
+
 }
 
 .RegisterRadioBtn{
+
     display:flex;
     gap:2rem;
     font-family: 'Work Sans';
     font-size:1.125rem;
     color:#000;
+
 }
 
 .RegisterRadioBtn input{
+
     transform:scale(1.5);
+
 }
 
 .RegisterNaturalPerson, .RegisterLegalPerson{
+
     display:flex;
     gap:.5rem;
     align-items: center;
     justify-content: center;
+
 }
 
 .RegisterForm{
+
     width: 80%;
     display:flex;
     flex-direction: column;
     gap:5rem;
     justify-content: center;
     align-items: center;
+
 }
 
 .RegisterArea{
+
     display:flex;
     flex-direction: column;
     gap:2rem;
     width: 90%;
+
 }
 
 .RegisterLines{
+
     display:flex;
     justify-content: space-evenly;
     gap:1rem;
+
 }
 
 .RegisterInput{
+
     display:flex;
     flex-direction: column;
     width: 45%;
     gap:.5rem;
     font-family: 'Work Sans';
     font-size:1.125rem;
+
 }
 
 .RegisterInput input {
+
     all:unset;
     height: 2rem;
     padding:0 .5rem;
     border:1px solid #545454;
     border-radius:.25rem;
+
 }
 
 .RegisterInput input[type="text"]:focus{
+
     border-color:rgba(67, 9, 213, 0.781);
     box-shadow: 0 0 5px rgba(67, 9, 213, 0.781);
+
 }
 
 #required{
+
     color:#ff0000;
+
 }
 
 #email .RegisterInput{
+
     width: 94%;
+
 }
 
 .RegisterCreateAcc{
+
     display:flex;
     justify-content: space-between;
     width: 80%;
     align-items: center;
     gap:3rem;
+
 }
 
 .RegisterCreateAcc button{
+
     all:unset;
     font-family: 'Work Sans';
     color:white;
@@ -143,63 +184,91 @@
     background: #FC5D0D;
     padding: 1.25rem 3rem;
     cursor: pointer;
+
 }
 
 .RegisterTerms {
+
     max-width: 25rem;
+
 }
 
 .RegisterTerms label{
+
     font-weight: 600;
     text-decoration: underline;
     cursor: pointer;
+
 }
 
 #mailError,#passwordError,#fillAll{
+
     color:#ff0000;
+
 }
 
 #fillAll{
+
     position: absolute;
     transform:translateY(-2rem);
+
 }
 
 @media(max-width:824px){
+
     .RegisterContainer{
+
         padding:5rem 3rem;
+
     }
 }
 
 @media(max-width:618px){
+
     .RegisterContainer{
+
         padding:5rem 1rem;
+
     }
 
     .RegisterInfo p{
+
         text-align: center;
+
     }
 
     .RegisterCreateAcc{
+
         flex-direction: column;
         flex-direction: column-reverse;
         text-align: center;
+
     }
 
     .RegisterArea{
+
         width: 100%;
+
     }
 
     .RegisterLines{
+
         flex-direction: column;
+
     }
 
     .RegisterInput, #email input{
+
         width: 100%;
+
     }
 }
 
 @media(max-width:500px){
+
     .RegisterIconBack{
+
         top:-1.5rem;
+        
     }
 }

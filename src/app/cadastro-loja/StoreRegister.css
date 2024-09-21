@@ -1,34 +1,43 @@
 .StoreRegisterContainer{
+
     display:flex;
     flex-direction: column;
     gap:5rem;
     padding: 0 10rem;
     padding-bottom:5rem;
     align-items: center;
+
 }
 
 .StoreRegisterTitle{
+
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap:.5rem;
+
 }
 
 .StoreRegisterTitle h1 {
+
     font-family: 'Playfair Display';
     font-weight: 500;
     font-size:2.5rem;
     color:#3B383B;
+
 }
 
 .StoreRegisterTitle p {
+
     font-family: 'Work Sans';
     font-size:1.125rem;
     color:#858487;
+
 }
 
 .StoreRegisterArea{
+
     display:flex;
     flex-direction: column;
     align-items: center;
@@ -36,43 +45,55 @@
     gap:1rem;
     font-family: 'Work Sans';
     font-size:1.125rem;
+
 }
 
 .StoreRegisterArea input{
+
     all:unset;
     height: 2rem;
     padding:0 .5rem;
     border:1px solid #545454;
     border-radius:.25rem;
+
 }
 
 .StoreRegisterArea input[type="text"]:focus{
+
     border-color:rgba(67, 9, 213, 0.781);
     box-shadow: 0 0 5px rgba(67, 9, 213, 0.781);
+
 }
 
 .StoreRegisterCEP,.StoreRegisterNeighborhood,.StoreRegisterAddress,.StoreName,.StoreInfo{
+
     display:flex;
     flex-direction: column;
     gap:.5rem;
     width: 50%;
+
 }
 
 .StoreRegisterLocal,.StoreRegisterCity,.StoreRegisterNumberAndComplement{
+
     display:flex;
     gap:1rem;
     width: 50%;
     justify-content: space-between;
+
 }
 
 .StoreRegisterState ,.StoreRegisterCity,.StoreNumber,.StoreComplement {
+
     display:flex;
     flex-direction: column;
     gap:.5rem;
     width: 45%;
+
 }
 
 .StoreResgiterSend button{
+
     all:unset;
     font-family: 'Work Sans';
     color:white;
@@ -80,27 +101,36 @@
     background: #FC5D0D;
     padding: 1.25rem 3rem;
     cursor: pointer;
+
 }
 
 #required{
+
     color:#ff0000;
+
 }
 
 
 @media (max-width:1000px) {
 
     .StoreRegisterCEP,.StoreRegisterNeighborhood,.StoreRegisterAddress,.StoreName,.StoreInfo{
+
         width: 100%;
+
     }
     
     .StoreRegisterLocal,.StoreRegisterCity,.StoreRegisterNumberAndComplement{
+
         width: 100%;
         box-sizing: border-box;
+
     }
 
     .StoreRegisterState ,.StoreRegisterCity,.StoreNumber,.StoreComplement {
+
         width: 50%;
         box-sizing: border-box;
+
     }
 
 
@@ -108,6 +138,7 @@
 
 
 @media(max-width:660px){
+    
     .StoreRegisterContainer{
   
         padding: 2rem 3rem;

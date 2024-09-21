@@ -7,6 +7,7 @@ import { validateRequiredFields } from "../functions";
 import { InfoContext } from "../Components/ContextProvider/contextProvider";
 import { createAcc, createUser } from "@/database/fs";
 import "./StoreRegister.css";
+import { useHandleNext } from "../Components/HandleNext/handleNext";
 
 export default function StoreRegister() {
   //@ts-ignore
@@ -28,6 +29,8 @@ export default function StoreRegister() {
       return "Digite valor correto para o campo CEP";
     }
   };
+
+  const handleNext = useHandleNext({ route: "/cadastro-catalogo" });
 
   const validateAll = () => {
     const newErrors = {};
@@ -76,6 +79,8 @@ export default function StoreRegister() {
         delete updateInfo.confPass;
 
         createUser(updateInfo);
+
+        handleNext();
       });
     }
   };
