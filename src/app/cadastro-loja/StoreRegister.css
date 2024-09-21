@@ -1,5 +1,6 @@
 .StoreRegisterContainer{
 
+    position:relative;
     display:flex;
     flex-direction: column;
     gap:5rem;
@@ -9,13 +10,39 @@
 
 }
 
-.StoreRegisterTitle{
+.StoreFormTitle{
 
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap:.5rem;
+    text-align: center;
+
+}
+
+.Title{
+
+    display: flex;
+    align-items: center;
+    
+}
+
+.StoreRegisterTitle{
+
+    display: flex;
+    align-items: center;
+
+}
+
+.RegisterIconBack{
+
+    display:flex;
+    align-items: center;
+    position: absolute;
+    left: -10rem;
+    cursor: pointer;
 
 }
 
@@ -144,4 +171,12 @@
         padding: 2rem 3rem;
     
     }
+
+    .RegisterIconBack{
+
+        left: 0rem;
+        top:-2rem;
+        
+    }
+
 }

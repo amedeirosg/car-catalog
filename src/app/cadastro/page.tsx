@@ -48,15 +48,6 @@ export default function Register() {
     }
   };
 
-  // const validateRequiredFields = () => {
-  //   const requiredFields = { name, lastName, cpfCnpj, mail, phone, password };
-  //   for (let [key, value] of Object.entries(requiredFields)) {
-  //     if (value.trim() === "") {
-  //       return `O campo ${key} é obrigatório.`;
-  //     }
-  //   }
-  // };
-
   const validateAll = () => {
     const newErrors = {};
     const emailError = validateEmail();
@@ -81,25 +72,20 @@ export default function Register() {
     setErrors(newErrors);
 
     if (Object.keys(newErrors).length === 0) {
-      
       try {
-        
-          setInfoAcc({
-            name,
-            lastName,
-            cpfCnpj,
-            mail,
-            phone,
-            password,
-            confPass,
-          });
-       
+        setInfoAcc({
+          name,
+          lastName,
+          cpfCnpj,
+          mail,
+          phone,
+          password,
+          confPass,
+        });
+
         window.location.assign("/cadastro-loja");
-
       } catch (err) {
-
         console.error("Erro na função validateAll() na tela de cadastro:", err);
-
       }
     }
   };

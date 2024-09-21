@@ -8,6 +8,8 @@ import { InfoContext } from "../Components/ContextProvider/contextProvider";
 import { createAcc, createUser } from "@/database/fs";
 import "./StoreRegister.css";
 import { useHandleNext } from "../Components/HandleNext/handleNext";
+import { useHandleBack } from "../Components/HandleBack/handleBack";
+import { ChevronLeft } from "lucide-react";
 
 export default function StoreRegister() {
   //@ts-ignore
@@ -21,6 +23,7 @@ export default function StoreRegister() {
   const [complement, setComplement] = useState("");
   const [nameOfStore, setNameOfStore] = useState("");
   const [errors, setErrors] = useState({});
+  const handleBack = useHandleBack();
 
   const validateCEP = () => {
     const cepRegex = /^\d{5}-?\d{3}$/;
@@ -91,8 +94,17 @@ export default function StoreRegister() {
         <RegisterHeader />
       </div>
       <div className="StoreRegisterTitle">
-        <h1>Endereço da loja</h1>
-        <p>Preencha as informações de endereço da sua loja</p>
+        <div className="StoreFormTitle">
+          <div className="Title">
+            <h1>Endereço da loja</h1>
+            <div className="RegisterIconBack" onClick={handleBack}>
+              <ChevronLeft />
+              <span>Voltar</span>
+            </div>
+          </div>
+
+          <p>Preencha as informações de endereço da sua loja</p>
+        </div>
       </div>
       <div className="StoreRegisterArea">
         <div className="StoreName">
