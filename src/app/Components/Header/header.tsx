@@ -6,12 +6,20 @@ import Image from "next/image";
 import { useState } from "react";
 import { X } from "lucide-react";
 import { useHandleNext } from "../HandleNext/handleNext";
-export default function Header() {
+
+interface HeaderProps {
+  displayHeader: boolean;
+}
+
+export default function Header({ displayHeader }: HeaderProps) {
   const [openMenu, setOpenMenu] = useState(false);
   const handleNext = useHandleNext({ route: "/login" });
   const handleHome = useHandleNext({ route: "/" });
   return (
-    <div className="HeaderContainer">
+    <div
+      className="HeaderContainer"
+      style={{ display: displayHeader ? "flex" : "none" }}
+    >
       <Link href={"/"} className="LinkStyle">
         <div className="HeaderLogo">
           <img src={Logo.src} alt="Logo da empresa" width={80} height={80} />

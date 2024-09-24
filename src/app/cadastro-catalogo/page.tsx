@@ -1,15 +1,17 @@
 "use client";
 import "./RegisterCatalog.css";
 import Logo from "../../../public/assets/logo.png";
-import { CarFrontIcon, X } from "lucide-react";
+import { CarFrontIcon, ShoppingCart, X } from "lucide-react";
 import { useContext, useEffect, useState } from "react";
 import { InfoContext } from "../Components/ContextProvider/contextProvider";
 import { getInfoUser } from "@/database/fs";
 import CatalogPrices from "../Components/CatalogPrices/catalogPrices";
+import AutoCatalog from "../autocatalog/page";
 export default function RegisterCatalog() {
   const [openMenu, setOpenMenu] = useState(false);
 
   const [loadPrices, setLoadPrices] = useState(false);
+  const [loadCatalog, setLoadCatalog] = useState(false);
   //@ts-ignore
   const { userId } = useContext(InfoContext);
   const [nameOfStore, setNameOfStore] = useState(null);
@@ -65,16 +67,32 @@ export default function RegisterCatalog() {
             <div
               className="RegisterCatalogNav"
               onClick={() => {
+                setLoadCatalog(false);
                 setLoadPrices(true);
               }}
             >
-              <CarFrontIcon />
-              <p>Atualizar catálogo</p>
+              <div className="RegisterOptionsNav">
+                <CarFrontIcon />
+                <p>Atualizar catálogo</p>
+              </div>
+            </div>
+            <div
+              className="RegisterCatalogNav"
+              onClick={() => {
+                setLoadPrices(false);
+                setLoadCatalog(true);
+              }}
+            >
+              <div className="RegisterOptionsNav">
+                <ShoppingCart />
+                <p>Ver tela de venda</p>
+              </div>
             </div>
           </div>
         </div>
       </div>
       {loadPrices ? <CatalogPrices /> : ""}
+      {loadCatalog ? <AutoCatalog displayFilter={false} /> : ""}
     </div>
   );
 }

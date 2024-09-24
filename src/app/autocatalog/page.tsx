@@ -4,16 +4,67 @@ import Card from "../Components/Card/card";
 import Header from "../Components/Header/header";
 import { X } from "lucide-react";
 import "./AutoCatalog.css";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { getInfoUser } from "@/database/fs";
+import { InfoContext } from "../Components/ContextProvider/contextProvider";
 
-export default function AutoCatalog() {
+interface AutoCatalogProps {
+  displayFilter: boolean;
+}
+
+export default function AutoCatalog({ displayFilter }: AutoCatalogProps) {
   const [openFilter, setOpenFilter] = useState(false);
+  //@ts-ignore
+  const { userId } = useContext(InfoContext);
+  const [cards, setCards] = useState([
+    { name: "", price: "", year: "", km: "", local: "" },
+  ]);
+
+  useEffect(() => {
+    getInfoUser(userId)
+      .then((res) => {
+        //@ts-ignore
+        if (res && res.cards) {
+          //@ts-ignore
+          const userCards = Object.values(res.cards).map((card) => ({
+            //@ts-ignore
+            name: card.name,
+            //@ts-ignore
+            price: card.price,
+            //@ts-ignore
+            year: card.year,
+            //@ts-ignore
+            km: card.km,
+            //@ts-ignore
+            local: card.local,
+          }));
+
+          setCards(userCards);
+        } else {
+          console.error("No cards found or user response is invalid");
+        }
+      })
+      .catch((error) => {
+        console.error("Error fetching user info:", error);
+      });
+  }, [userId]);
+
+  console.log(displayFilter);
 
   return (
     <div className="Header">
-      <Header />
+      <Header displayHeader={displayFilter} />
       <div className={`AutoCatalogArea ${openFilter ? "overlay" : ""}`}>
-        <div className="AutoCatalogContainer">
+        <div
+          className="AutoCatalogContainer"
+          style={{
+            display: displayFilter
+              ? "undefined"
+              : displayFilter === undefined
+              ? "undefined"
+              : "none",
+          }}
+        >
           <div className="AutoCatalogFilters">
             <div className="AutoCatalogBrand">
               <span>Marca, modelo e versão</span>
@@ -208,11 +259,22 @@ export default function AutoCatalog() {
           ""
         )}
         <div className="Cards">
+          {cards.map((res, index) => (
+            <Card
+              key={index}
+              name={res.name}
+              price={res.price}
+              year={res.year}
+              km={res.km}
+              local={res.local}
+            />
+          ))}
+
+          {/* <Card />
           <Card />
           <Card />
           <Card />
-          <Card />
-          <Card />
+          <Card /> */}
         </div>
       </div>
     </div>

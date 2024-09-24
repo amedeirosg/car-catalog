@@ -5,6 +5,12 @@
 
 }
 
+.Header{
+
+    width: 100%;
+
+}
+
 .AutoCatalogContainer{
 
     padding: 2rem ;
@@ -129,7 +135,7 @@ label{
     display:grid;
     grid-template-columns: repeat(4,auto);
     align-items: center;
-    gap:1rem;
+    gap:2rem;
 
 }
 

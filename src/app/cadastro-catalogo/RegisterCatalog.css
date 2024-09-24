@@ -58,8 +58,17 @@
     padding:.5rem 1rem;
     display:flex;
     align-items: center;
-    gap:.5rem;
+    flex-direction: column;
+    gap:2rem;
     cursor:pointer;
+
+}
+
+.RegisterOptionsNav{
+
+    display:flex;
+    align-items: center;
+    gap:.5rem;
 
 }
 

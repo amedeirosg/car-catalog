@@ -2,23 +2,31 @@ import "./Card.css";
 import Image from "next/image";
 import CarTest from "../../../../public/assets/sellVehicle.png";
 
-export default function Card() {
+interface CardProps {
+  name: string;
+  price: string;
+  year: string;
+  km: string;
+  local: string;
+}
+
+export default function Card({ name, price, year, km, local }: CardProps) {
   return (
     <div className="CardContainer">
       <Image src={CarTest} alt={"imagem do veículo"} width={269} height={207} />
       <div className="CardCarInfo">
-        <h1>Nome do carro</h1>
+        <h1>{name}</h1>
         <div className="CardCarPrice">
-          <p id="PriceCar">R$ 0,00</p>
+          <p id="PriceCar">R$ {price}</p>
           <p id="ShowInstallments">ver parcelas</p>
         </div>
         <div className="CardYearKm">
-          <p>0000</p>
-          <p>0km</p>
+          <p>{year}</p>
+          <p>{km}</p>
         </div>
         <hr></hr>
         <div className="CardCarLocal">
-          <p>Localidade</p>
+          <p>{local}</p>
         </div>
       </div>
     </div>
