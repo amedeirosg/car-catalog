@@ -5,9 +5,14 @@ import { useContext, useEffect, useState } from "react";
 import { InfoContext } from "../ContextProvider/contextProvider";
 import { getInfoUser, updateUser } from "@/database/fs";
 import { validateRequiredFields } from "@/app/functions";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function CatalogPrices() {
   const [err, setErr] = useState({});
+
+  const success = () => toast.success("Registros salvos com sucesso!");
+  const error = () => toast.error("Erro ao salvar os registros");
 
   //@ts-ignore
   const { userId } = useContext(InfoContext);
@@ -15,6 +20,16 @@ export default function CatalogPrices() {
   const [cards, setCards] = useState([
     { name: "", price: "", year: "", km: "", local: "" },
   ]);
+
+  const handlePrice = (value: string) => {
+    const numericValue = value.replace(/\D/g, ""); //Remove what is not number
+
+    const formattedValue = (Number(numericValue) / 100).toLocaleString(
+      "pt-BR",
+      { style: "currency", currency: "BRL" }
+    );
+    return formattedValue;
+  };
 
   const addCard = () => {
     setCards([...cards, { name: "", price: "", year: "", km: "", local: "" }]);
@@ -49,10 +64,11 @@ export default function CatalogPrices() {
 
     updateUser(userId, { cards: cardsObject })
       .then(() => {
-        console.log("Cards salvos com sucesso!");
+        success();
+        setErr("");
       })
       .catch((err) => {
-        console.error("Erro ao salvar os cards:", err);
+        error();
       });
   };
 
@@ -63,9 +79,15 @@ export default function CatalogPrices() {
   //@ts-ignore
   const handleInputChange = (index, field, value) => {
     const updatedCards = [...cards];
+    console.log(updatedCards[index][field]);
+    if (field === "price") {
+      updatedCards[index][field] = handlePrice(value);
+    } else {
+      // Atualiza o campo normalmente
+      updatedCards[index][field] = value;
+    }
 
     //@ts-ignore
-    updatedCards[index][field] = value;
     setCards(updatedCards);
   };
 
@@ -100,6 +122,7 @@ export default function CatalogPrices() {
 
   return (
     <div className="CatalogPricesContainer">
+      <ToastContainer autoClose={3000} closeOnClick pauseOnHover />
       <div className="CatalogEditCards">
         {cards.map((card, index) => (
           <div className="EditCards" key={index}>

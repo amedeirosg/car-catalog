@@ -4,7 +4,7 @@ import CarTest from "../../../../public/assets/sellVehicle.png";
 
 interface CardProps {
   name: string;
-  price: string;
+  price: number;
   year: string;
   km: string;
   local: string;
@@ -17,12 +17,12 @@ export default function Card({ name, price, year, km, local }: CardProps) {
       <div className="CardCarInfo">
         <h1>{name}</h1>
         <div className="CardCarPrice">
-          <p id="PriceCar">R$ {price}</p>
+          <p id="PriceCar">{price}</p>
           <p id="ShowInstallments">ver parcelas</p>
         </div>
         <div className="CardYearKm">
           <p>{year}</p>
-          <p>{km}</p>
+          <p>{km} km</p>
         </div>
         <hr></hr>
         <div className="CardCarLocal">

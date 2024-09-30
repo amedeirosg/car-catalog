@@ -49,8 +49,6 @@ export default function AutoCatalog({ displayFilter }: AutoCatalogProps) {
       });
   }, [userId]);
 
-  console.log(displayFilter);
-
   return (
     <div className="Header">
       <Header displayHeader={displayFilter} />
@@ -269,12 +267,6 @@ export default function AutoCatalog({ displayFilter }: AutoCatalogProps) {
               local={res.local}
             />
           ))}
-
-          {/* <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card /> */}
         </div>
       </div>
     </div>

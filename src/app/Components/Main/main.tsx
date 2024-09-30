@@ -7,7 +7,7 @@ import { useHandleNext } from "../HandleNext/handleNext";
 export default function Main() {
   return (
     <div className="Header">
-      <Header />
+      <Header displayHeader={true} />
       <div className="MainContainer">
         <div className="MainPresentation">
           <div className="MainTitle">
