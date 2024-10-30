@@ -13,7 +13,12 @@ interface CardProps {
 export default function Card({ name, price, year, km, local }: CardProps) {
   return (
     <div className="CardContainer">
-      <Image src={CarTest} alt={"imagem do veículo"} width={269} height={207} />
+      <img
+        src={CarTest.src}
+        alt={"imagem do veículo"}
+        width={269}
+        height={207}
+      />
       <div className="CardCarInfo">
         <h1>{name}</h1>
         <div className="CardCarPrice">

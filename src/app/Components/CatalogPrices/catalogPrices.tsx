@@ -127,8 +127,8 @@ export default function CatalogPrices() {
         {cards.map((card, index) => (
           <div className="EditCards" key={index}>
             <div className="CardContainer">
-              <Image
-                src={CarTest}
+              <img
+                src={CarTest.src}
                 alt={"imagem do veículo"}
                 width={269}
                 height={207}

@@ -1,10 +1,14 @@
 .RegisterCatalogContainer{
-
     position:relative;
     display:flex;
     gap:2rem;
     height: 100%;
 
+}
+
+.LoadingGif{
+    position: absolute;
+    z-index: 999;
 }
 
 .RegisterCatalogTitle{
@@ -99,6 +103,42 @@
 
     display: none;
 
+}
+
+.RegisterCatalogSubT{
+    display:flex;
+    flex-direction: column;
+    gap:1rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.RegisterSubOptMap{
+    display:flex;
+    gap:.5rem;
+    align-items: center;
+    
+}
+
+.RegisterSubOptMap{
+    width: 100%;
+    padding:1rem;
+    box-sizing: border-box;
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.RegisterSubOptMap.clicked{
+    background: #1bc8b6;
+}
+
+.RegisterLoadingFields{
+    display: visible;
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform: translate(-50%,-50%);
+    z-index:9999;
 }
 
 @media (max-width:1100px ){

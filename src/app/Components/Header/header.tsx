@@ -8,9 +8,10 @@ import { X } from "lucide-react";
 import { useHandleNext } from "../HandleNext/handleNext";
 
 interface HeaderProps {
-  displayHeader: boolean;
+  displayHeader?: boolean | undefined;
 }
 
+//@ts-ignore"
 export default function Header({ displayHeader }: HeaderProps) {
   const [openMenu, setOpenMenu] = useState(false);
   const handleNext = useHandleNext({ route: "/login" });
